@@ -3,10 +3,10 @@ version: '3.1'
 services:
   postgres:
     image: postgres:latest
-    container_name: social_network
+    container_name: apartments
     environment:
       POSTGRES_USER: kattsyn
       POSTGRES_PASSWORD: katt
-      POSTGRES_DB: social_network_db
+      POSTGRES_DB: apartments_db
     ports:
       - "5432:5432"
