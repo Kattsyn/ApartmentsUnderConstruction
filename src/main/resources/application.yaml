@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: ApartmentsUnderConstruction
+  jpa:
+    hibernate:
+      ddl-auto: none
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/apartments_db
+    username: kattsyn
+    password: katt
