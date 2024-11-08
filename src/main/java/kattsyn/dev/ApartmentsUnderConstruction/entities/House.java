@@ -41,6 +41,8 @@ public class House {
         this.commissioningDate = commissioningDate;
     }
 
+    /*
     @OneToMany
     List<Floor> floors;
+     */
 }
