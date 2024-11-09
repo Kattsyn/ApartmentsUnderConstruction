@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("owners/")
+@RequestMapping("/owners")
 @RequiredArgsConstructor
 public class OwnerController {
 

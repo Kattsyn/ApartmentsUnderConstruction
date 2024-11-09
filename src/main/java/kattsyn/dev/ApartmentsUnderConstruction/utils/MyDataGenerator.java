@@ -2,7 +2,6 @@ package kattsyn.dev.ApartmentsUnderConstruction.utils;
 
 import com.vaadin.exampledata.DataType;
 import com.vaadin.exampledata.ExampleDataGenerator;
-import com.vaadin.flow.data.provider.DataGenerator;
 import kattsyn.dev.ApartmentsUnderConstruction.entities.House;
 import kattsyn.dev.ApartmentsUnderConstruction.repositories.HouseRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +29,7 @@ public class MyDataGenerator {
                 generator.setData(House::setBuildingStartDate, DataType.DATE_LAST_1_YEAR);
                 generator.setData(House::setPlannedBuildingEndDate, DataType.DATE_NEXT_7_DAYS);
                 generator.setData(House::setCommissioningDate, DataType.DATE_NEXT_1_YEAR);
+                //generator.setData(House::setFloors, null);
 
                 StopWatch stop = new StopWatch();
                 stop.start();
