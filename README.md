@@ -1,7 +1,22 @@
 # **Apartments Under Construction**
 
 ## **Docker** 
-\nDocker compose file contains only Postgres DB container.
+docker-compose file contains only Postgres DB container.
+
+'''
+version: '3.1'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: apartments
+    environment:
+      POSTGRES_USER: kattsyn
+      POSTGRES_PASSWORD: katt
+      POSTGRES_DB: apartments_db
+    ports:
+      - "5432:5432"
+'''
 
 ## **Database scheme**
 
