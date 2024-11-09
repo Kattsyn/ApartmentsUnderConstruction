@@ -1,5 +1,9 @@
 # **Apartments Under Construction**
 
+## **Task**
+
+ “Apartments in houses under construction”. A construction company needs an application that will record houses under construction and apartments in them. House attributes: address, name, construction start date, planned completion date, commissioning date. For an apartment: total area, living area, number of rooms, floor, entrance, price, as well as the state of sale: free, reserved, sold. It is desirable to make it possible to download floor plans of buildings.
+
 ## **Docker** 
 docker-compose file contains only Postgres DB container.
 
