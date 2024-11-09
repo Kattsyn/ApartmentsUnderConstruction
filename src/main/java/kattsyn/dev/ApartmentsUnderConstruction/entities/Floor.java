@@ -6,27 +6,31 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "floors")
 public class Floor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "floor_id")
-    Long floorId;
+    private Long floorId;
     @Column(name = "floor_number")
-    Byte floorNumber;
+    private Byte floorNumber;
     @Column(name = "floor_plan")
-    String floorPlan;
+    private String floorPlan;
 
-    @OneToMany
-    List<Apartment> apartments;
+    public Floor(Byte floorNumber, String floorPlan) {
+        this.floorNumber = floorNumber;
+        this.floorPlan = floorPlan;
+    }
+
 
     @ManyToOne
-    House house;
+    @JoinColumn(name = "house_id")
+    private House house;
 }
