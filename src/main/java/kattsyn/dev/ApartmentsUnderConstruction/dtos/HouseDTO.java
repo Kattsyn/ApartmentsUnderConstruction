@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 
 @Getter
@@ -14,9 +13,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class HouseDTO {
 
-    //@NotEmpty(message = "The address is required.")
     private String address;
-    //@NotEmpty(message = "The name is required.")
     private String name;
     private LocalDate buildingStartDate;
     private LocalDate plannedBuildingEndDate;
@@ -36,7 +33,5 @@ public class HouseDTO {
         }
         this.commissioningDate = commissioningDate;
     }
-    //todo: разобраться что с этим делать, либо удалить, тк та же проверка происходит на фронте. Если забить,
-    то вылетает ошибка от bindingResult в методе create. А если закомментить вылет ошибки, то поле commissioningDate не сохраняется
      */
 }

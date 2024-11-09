@@ -11,12 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
-import java.time.LocalDate;
-import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -120,16 +114,16 @@ public class HouseService {
         return "redirect:/houses";
     }
 
-    public House deleteHouseById(Long id) {
+    public String deleteHouseById(Long id) {
         Optional<House> house = houseRepository.findById(id);
 
         if (house.isPresent()) {
             houseRepository.delete(house.get());
-            return house.get();
         } else {
-            throw new IllegalArgumentException("House not found.");
+            log.error("House id: {} in method deleteHouseById() NOT FOUND", id);
         }
 
+        return "redirect:/houses";
     }
 
     public House save(HouseDTO houseDTO) {
@@ -142,22 +136,4 @@ public class HouseService {
 
         return houseRepository.save(house);
     }
-
-    public House addTestHouse(Optional<House> house) {
-        if (house.isPresent()) {
-            log.info("Saving prepared house...");
-            return houseRepository.save(house.get());
-        } else {
-            log.info("Saving new test House...");
-            return houseRepository.save(new House(
-                    "some address",
-                    "some name",
-                    LocalDate.now(),
-                    LocalDate.now(),
-                    LocalDate.now()
-            ));
-        }
-    }
-
-
 }
