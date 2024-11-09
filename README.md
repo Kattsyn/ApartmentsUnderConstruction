@@ -3,7 +3,7 @@
 ## **Docker** 
 docker-compose file contains only Postgres DB container.
 
-'''
+```
 version: '3.1'
 
 services:
@@ -16,7 +16,7 @@ services:
       POSTGRES_DB: apartments_db
     ports:
       - "5432:5432"
-'''
+```
 
 ## **Database scheme**
 
