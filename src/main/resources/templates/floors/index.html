@@ -25,12 +25,11 @@
         </tr>
         </thead>
         <tbody>
-        <!--/*@thymesVar id="houses" type="kattsyn.dev.ApartmentsUnderConstruction.entities.House"*/-->
         <tr th:each="floor : ${floors}">
 
             <td th:text="${floor.floorId}"></td>
             <td th:text="${floor.house.houseId}"></td>
-            <td th:text="${floor.floorNumber}"></td>
+            <td th:text="|${floor.floorNumber}-й этаж|">3 этаж</td>
 
             <td>
                 <img th:src="${floor.floorPlan}" alt="Floor Plan" class="img-fluid" style="height: 50px;">
