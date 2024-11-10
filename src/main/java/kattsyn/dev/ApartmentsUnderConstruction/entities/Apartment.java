@@ -19,25 +19,27 @@ public class Apartment {
     @Id
     @Column(name = "apartment_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long apartmentId;
+    private Long apartmentId;
     @Column(name = "total_area")
-    Integer totalArea;
+    private Integer totalArea;
     @Column(name = "living_area")
-    Integer livingArea;
+    private Integer livingArea;
     @Column(name = "amount_of_rooms")
-    Byte amountOfRooms;
+    private Byte amountOfRooms;
     @Column(name = "entrance_number")
-    Byte entranceNumber;
+    private Byte entranceNumber;
     @Column(name = "apartment_cost")
-    Integer apartmentCost;
+    private Integer apartmentCost;
     @Column(name = "apartment_plan")
-    String apartmentPlan;
+    private String apartmentPlan;
 
     @ManyToOne
-    Floor floor;
+    @JoinColumn(name = "floor_id")
+    private Floor floor;
     @ManyToOne
-    SaleStatus status;
+    @JoinColumn(name = "sale_status_id")
+    private SaleStatus status;
 
     @ManyToMany
-    List<Owner> owners;
+    private List<Owner> owners;
 }
