@@ -40,6 +40,15 @@ public class Apartment {
     @JoinColumn(name = "sale_status_id")
     private SaleStatus status;
 
-    @ManyToMany
-    private List<Owner> owners;
+    //@ManyToMany
+    //private List<Owner> owners;
+
+    public Apartment(Integer totalArea, Integer livingArea, Byte amountOfRooms, Byte entranceNumber, Integer apartmentCost, String apartmentPlan) {
+        this.totalArea = totalArea;
+        this.livingArea = livingArea;
+        this.amountOfRooms = amountOfRooms;
+        this.entranceNumber = entranceNumber;
+        this.apartmentCost = apartmentCost;
+        this.apartmentPlan = apartmentPlan;
+    }
 }
