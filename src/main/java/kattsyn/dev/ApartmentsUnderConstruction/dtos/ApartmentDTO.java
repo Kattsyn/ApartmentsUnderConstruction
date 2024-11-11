@@ -24,9 +24,9 @@ public class ApartmentDTO {
     private Integer apartmentCost;
     private String apartmentPlan;
 
-    Long floorId;
-    Integer statusId;
-    List<Owner> owners;
+    private Long floorId;
+    private Long statusId;
+    private List<Owner> owners;
 
     public ApartmentDTO(Integer totalArea, Integer livingArea, Byte amountOfRooms, Byte entranceNumber, Integer apartmentCost, String apartmentPlan) {
         this.totalArea = totalArea;

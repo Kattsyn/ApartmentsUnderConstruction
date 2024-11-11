@@ -42,4 +42,13 @@ public class Apartment {
 
     @ManyToMany
     private List<Owner> owners;
+
+    public Apartment(Integer totalArea, Integer livingArea, Byte amountOfRooms, Byte entranceNumber, Integer apartmentCost, String apartmentPlan) {
+        this.totalArea = totalArea;
+        this.livingArea = livingArea;
+        this.amountOfRooms = amountOfRooms;
+        this.entranceNumber = entranceNumber;
+        this.apartmentCost = apartmentCost;
+        this.apartmentPlan = apartmentPlan;
+    }
 }
