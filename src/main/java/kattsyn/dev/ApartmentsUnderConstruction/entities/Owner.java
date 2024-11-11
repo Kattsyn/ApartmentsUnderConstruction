@@ -29,6 +29,7 @@ public class Owner {
     @Column(name = "email")
     private String email;
 
+    /*
     @ManyToMany
     @JoinTable(
             name = "apartments_owners",
@@ -36,6 +37,8 @@ public class Owner {
             inverseJoinColumns = @JoinColumn(name = "owner_id")
     )
     private List<Apartment> apartments;
+
+     */
 
 
 }
