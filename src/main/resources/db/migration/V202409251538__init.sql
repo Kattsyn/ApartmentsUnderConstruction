@@ -1,4 +1,3 @@
-
 CREATE TABLE houses
 (
     house_id                  BIGSERIAL PRIMARY KEY,

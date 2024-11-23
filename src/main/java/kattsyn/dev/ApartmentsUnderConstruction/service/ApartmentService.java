@@ -28,6 +28,16 @@ public class ApartmentService {
     private final FloorRepository floorRepository;
     private final StatusRepository statusRepository;
 
+    public String showInfoPage(Model model, Long id) {
+        Optional<Apartment> apartment = apartmentRepository.findById(id);
+        if (apartment.isEmpty()) {
+            log.error("Apartment with id {} not found", id);
+            return "redirect:/apartments";
+        }
+        model.addAttribute("apartment", apartment.get());
+        return "apartments/info-apartment";
+    }
+
     public String showApartmentsList(Model model) {
         List<Apartment> apartments = apartmentRepository.findAll();
         model.addAttribute("apartments", apartments);
