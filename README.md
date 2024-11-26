@@ -26,4 +26,4 @@ services:
 
 ## **Database scheme**
 
-![Database scheme]((https://github.com/user-attachments/assets/74db1869-0e8c-4ebb-ac98-e1680f0fd4b4))
+![Database scheme](https://github.com/user-attachments/assets/0cbef3e7-3cab-4ce7-8bc7-659f6ed870d9)
