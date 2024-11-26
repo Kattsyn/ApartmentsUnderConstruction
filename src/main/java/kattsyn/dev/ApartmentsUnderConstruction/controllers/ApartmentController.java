@@ -17,6 +17,12 @@ public class ApartmentController {
 
     private final ApartmentService apartmentService;
 
+    @GetMapping("/info")
+    public String showInfoPage(Model model, @RequestParam Long id) {
+        return apartmentService.showInfoPage(model, id);
+    }
+
+
     @GetMapping({"", "/"})
     public String showApartmentsList(Model model) {
         return apartmentService.showApartmentsList(model);

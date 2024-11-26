@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Entity
 @Getter
 @Setter
@@ -20,6 +18,8 @@ public class Apartment {
     @Column(name = "apartment_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long apartmentId;
+    @Column(name = "apartment_number")
+    private Integer apartmentNumber;
     @Column(name = "total_area")
     private Integer totalArea;
     @Column(name = "living_area")
@@ -43,7 +43,7 @@ public class Apartment {
     //@ManyToMany
     //private List<Owner> owners;
 
-    public Apartment(Integer totalArea, Integer livingArea, Byte amountOfRooms, Byte entranceNumber, Integer apartmentCost, String apartmentPlan) {
+    public Apartment(Integer apartmentNumber, Integer totalArea, Integer livingArea, Byte amountOfRooms, Byte entranceNumber, Integer apartmentCost, String apartmentPlan) {
         this.totalArea = totalArea;
         this.livingArea = livingArea;
         this.amountOfRooms = amountOfRooms;

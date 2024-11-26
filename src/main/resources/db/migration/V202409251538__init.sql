@@ -1,4 +1,3 @@
-
 CREATE TABLE houses
 (
     house_id                  BIGSERIAL PRIMARY KEY,
@@ -26,15 +25,16 @@ CREATE TABLE sale_statuses
 
 CREATE TABLE apartments
 (
-    apartment_id    BIGSERIAL PRIMARY KEY NOT NULL,
-    floor_id        BIGINT                NOT NULL,
-    sale_status_id  INT                   NOT NULL,
-    total_area      INT                   NOT NULL,
-    living_area     INT                   NOT NULL,
-    amount_of_rooms SMALLINT              NOT NULL,
-    entrance_number SMALLINT              NOT NULL,
-    apartment_cost  INT                   NOT NULL,
-    apartment_plan  VARCHAR(1000),
+    apartment_id     BIGSERIAL PRIMARY KEY NOT NULL,
+    floor_id         BIGINT                NOT NULL,
+    sale_status_id   INT                   NOT NULL,
+    apartment_number INT                   NOT NULL,
+    total_area       INT                   NOT NULL,
+    living_area      INT                   NOT NULL,
+    amount_of_rooms  SMALLINT              NOT NULL,
+    entrance_number  SMALLINT              NOT NULL,
+    apartment_cost   INT                   NOT NULL,
+    apartment_plan   VARCHAR(1000),
     foreign key (floor_id) references floors (floor_id),
     foreign key (sale_status_id) references sale_statuses (sale_status_id)
 );
