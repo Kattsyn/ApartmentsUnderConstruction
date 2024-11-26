@@ -2,7 +2,7 @@
 --Статусы продажи
 INSERT INTO sale_statuses (sale_status_id, name)
 VALUES (0, 'ON SALE'),
-       (1, 'IN PROCESS'),
+       (1, 'RESERVED'),
        (2, 'SOLD');
 
 SELECT setval('public.sale_statuses_sale_status_id_seq', (SELECT MAX(sale_status_id) FROM sale_statuses));
