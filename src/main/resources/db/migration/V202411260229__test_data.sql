@@ -34,3 +34,23 @@ INSERT INTO apartments (apartment_id, floor_id, sale_status_id, apartment_number
 INSERT INTO apartments (apartment_id, floor_id, sale_status_id, apartment_number, total_area, living_area, amount_of_rooms, entrance_number, apartment_cost, apartment_plan) VALUES (7, 4, 0, 85, 54.98, 53.43, 1, 5, 5398966, 'https://rzv.ru/upload/resized_cache_custom/xml_00124_000000681_000007469_Plan_8e237d6987ba11ef867fb3409566c4e4_726x10000.jpg');
 
 SELECT setval('public.apartments_apartment_id_seq', (SELECT MAX(apartment_id) FROM apartments));
+
+--Роли
+
+INSERT INTO roles (role_id, name) VALUES (0, 'ROLE_USER');
+INSERT INTO roles (role_id, name) VALUES (1, 'ROLE_MANAGER');
+INSERT INTO roles (role_id, name) VALUES (2, 'ROLE_ADMIN');
+
+SELECT setval('public.roles_role_id_seq', (SELECT MAX(role_id) from roles));
+
+--Пользователи
+
+INSERT INTO users (user_id, username, password, name, surname, phone_number, email) VALUES (0, 'admin', '$2a$10$A9R5tDQq3SFDKJa.J0OYj.PlLlFqbf/mfzyrcwMjMi0w22mZE5N3i', 'admin', 'admin', '+8999', 'mail@mail.ru');
+
+SELECT setval('public.users_user_id_seq', (SELECT MAX(user_id) from users));
+
+--Пользователи + роли
+
+INSERT INTO users_role (user_id, role_id) VALUES (0, 2);
+
+SELECT setval('public.users_role_users_roles_id_seq', (SELECT MAX(user_id) from users_role));

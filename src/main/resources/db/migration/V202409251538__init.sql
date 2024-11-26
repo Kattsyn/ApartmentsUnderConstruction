@@ -29,8 +29,8 @@ CREATE TABLE apartments
     floor_id         BIGINT                NOT NULL,
     sale_status_id   INT                   NOT NULL,
     apartment_number INT                   NOT NULL,
-    total_area       FLOAT                   NOT NULL,
-    living_area      FLOAT                   NOT NULL,
+    total_area       FLOAT                 NOT NULL,
+    living_area      FLOAT                 NOT NULL,
     amount_of_rooms  SMALLINT              NOT NULL,
     entrance_number  SMALLINT              NOT NULL,
     apartment_cost   INT                   NOT NULL,
@@ -56,3 +56,28 @@ CREATE TABLE apartments_owners
     foreign key (owner_id) references owners (owner_id)
 );
 
+CREATE TABLE roles
+(
+    role_id SERIAL PRIMARY KEY NOT NULL,
+    name    VARCHAR(100)       NOT NULL
+);
+
+CREATE TABLE users
+(
+    user_id      BIGSERIAL PRIMARY KEY NOT NULL,
+    username     VARCHAR(50)          NOT NULL,
+    password     VARCHAR(200)          NOT NULL,
+    name         VARCHAR(50)          NOT NULL,
+    surname      VARCHAR(50)          NOT NULL,
+    phone_number VARCHAR(20)           NOT NULL,
+    email        VARCHAR(80)
+);
+
+CREATE TABLE users_role
+(
+    users_roles_id BIGSERIAL PRIMARY KEY NOT NULL,
+    user_id        BIGINT                NOT NULL,
+    role_id        INT                   NOT NULL,
+    foreign key (user_id) references users (user_id),
+    foreign key (role_id) references roles (role_id)
+);
