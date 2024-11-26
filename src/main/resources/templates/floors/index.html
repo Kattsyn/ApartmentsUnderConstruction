@@ -37,7 +37,7 @@
             <td><a class="btn btn-success"
                    th:href="@{/floors/getFloorPlan(id=${floor.floorId})}">Floor Plan</a>
                 <a class="btn btn-success"
-                   th:href="@{/floors/getApartments(id=${floor.floorId})}">Get Apartments</a></td>
+                   th:href="@{/apartments/byFloorId(floorId=${floor.floorId})}">Get Apartments</a></td>
             <td style="white-space: nowrap">
                 <a class="btn btn-primary btn sm"
                    th:href="@{/floors/edit(id=${floor.floorId})}">Edit</a>

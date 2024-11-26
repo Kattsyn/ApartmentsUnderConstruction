@@ -19,7 +19,7 @@ public class SaleStatus {
 
     @Id
     @Column(name = "sale_status_id")
-    Long saleStatusId;
+    private Long saleStatusId;
     @Column(name = "name")
-    String name;
+    private String name;
 }
