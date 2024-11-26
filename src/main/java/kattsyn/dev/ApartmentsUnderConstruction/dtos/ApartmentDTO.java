@@ -15,8 +15,8 @@ import java.util.List;
 public class ApartmentDTO {
 
     private Integer apartmentNumber;
-    private Integer totalArea;
-    private Integer livingArea;
+    private Float totalArea;
+    private Float livingArea;
     private Byte amountOfRooms;
     private Byte entranceNumber;
     private Integer apartmentCost;
@@ -26,7 +26,7 @@ public class ApartmentDTO {
     private Long statusId;
     private List<Owner> owners;
 
-    public ApartmentDTO(Integer apartmentNumber, Integer totalArea, Integer livingArea, Byte amountOfRooms, Byte entranceNumber, Integer apartmentCost, String apartmentPlan) {
+    public ApartmentDTO(Integer apartmentNumber, Float totalArea, Float livingArea, Byte amountOfRooms, Byte entranceNumber, Integer apartmentCost, String apartmentPlan) {
         this.apartmentNumber = apartmentNumber;
         this.totalArea = totalArea;
         this.livingArea = livingArea;

@@ -21,9 +21,9 @@ public class Apartment {
     @Column(name = "apartment_number")
     private Integer apartmentNumber;
     @Column(name = "total_area")
-    private Integer totalArea;
+    private Float totalArea;
     @Column(name = "living_area")
-    private Integer livingArea;
+    private Float livingArea;
     @Column(name = "amount_of_rooms")
     private Byte amountOfRooms;
     @Column(name = "entrance_number")
@@ -43,7 +43,8 @@ public class Apartment {
     //@ManyToMany
     //private List<Owner> owners;
 
-    public Apartment(Integer apartmentNumber, Integer totalArea, Integer livingArea, Byte amountOfRooms, Byte entranceNumber, Integer apartmentCost, String apartmentPlan) {
+    public Apartment(Integer apartmentNumber, Float totalArea, Float livingArea, Byte amountOfRooms, Byte entranceNumber, Integer apartmentCost, String apartmentPlan) {
+        this.apartmentNumber = apartmentNumber;
         this.totalArea = totalArea;
         this.livingArea = livingArea;
         this.amountOfRooms = amountOfRooms;
