@@ -56,14 +56,14 @@
 
     <!-- Заголовок -->
     <header class="header-title my-5">
-        <h1 th:text="|${apartment.amountOfRooms}-комнатная квартира, ${apartment.totalArea} м², ${apartment.floor.floorNumber} этаж, ${apartment.floor.house.name}|" class="m-0">3-комнатная квартира, 77.64 м², 18 этаж, Галактика</h1>
+        <h1 th:text="|${apartment.amountOfRooms}-комнатная квартира, ${apartment.totalArea} м&sup2, ${apartment.floor.floorNumber} этаж, ${apartment.floor.house.name}|" class="m-0">3-комнатная квартира, 77.64 м², 18 этаж, Галактика</h1>
     </header>
 
     <div class="container-fluid my-5">
         <div class="row">
             <!-- Карусель -->
             <div class="col carousel-container">
-                <div id="carouselExampleDark" class="carousel carousel-fade slide" data-bs-ride="carousel">
+                <div id="carouselExampleDark"  data-bs-theme="dark" class="carousel carousel-fade slide" data-bs-ride="carousel">
                     <div class="carousel-indicators">
                         <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                         <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -74,7 +74,7 @@
                             <img th:src="${apartment.apartmentPlan}"
                                  src="https://rzv.ru/upload/resized_cache_custom/xml_00007_000000073_000000159_Plan_726x10000.jpg" class="d-block w-100" alt="Apartment Plan">
                             <div class="carousel-caption d-none d-md-block">
-                                <h5>План квартиры</h5>
+                                <h4>План квартиры</h4>
                             </div>
                         </div>
                         <!-- Вторая картинка (план этажа) -->
@@ -82,7 +82,7 @@
                             <img th:src="${apartment.floor.floorPlan}"
                                     src="https://rzv.ru/upload/resized_cache_custom/xml_00007_000000073_000000159_Plan1_726x10000.jpg" class="d-block w-100" alt="Floor Plan">
                             <div class="carousel-caption d-none d-md-block">
-                                <h5>План этажа</h5>
+                                <h4>План этажа</h4>
                             </div>
                         </div>
                     </div>
@@ -99,28 +99,40 @@
 
             <!-- Информация о квартире -->
             <div class="col info-container">
-                <div class="card bg-light">
+                <div class="card bg-light" >
                     <div class="card-body">
                         <h5 class="card-title" th:text="|от ${apartment.amountOfRooms}-комнатная квартира, ${apartment.totalArea} м²|">3-комнатная квартира 77.64 м²</h5>
                         <h3 th:text="|от ${#numbers.formatInteger(apartment.apartmentCost,3,'WHITESPACE')} ₽|">от 7 220 520 ₽</h3>
                         <hr>
-                        <p th:text="|${apartment.floor.house.address}|"
-                        ><strong>Галактика г. Воронеж, Независимости, 84</strong></p>
+                        <p
+                        ><strong th:text="|${apartment.floor.house.name}, ${apartment.floor.house.address}|">Галактика г. Воронеж, Независимости, 84</strong></p>
 
                         <div class="row">
                             <div class="col-6">
-                                <p><strong>Секция:</strong> Альфа</p>
+                                <p>
+                                    <strong>№ подъезда: </strong>
+                                    <span th:text="${apartment.floor.floorNumber}">3</span>
+                                </p>
                             </div>
                             <div class="col-6">
-                                <p th:text="|${apartment.floor.floorNumber} этаж|"><strong>Этаж:</strong> 18 этаж</p>
+                                <p>
+                                    <strong>Этаж:</strong>
+                                    <span th:text="${apartment.floor.floorNumber} + ' этаж'">18 этаж</span>
+                                </p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-6">
-                                <p><strong>№ квартиры:</strong> 282</p>
+                                <p>
+                                    <strong>№ квартиры:</strong>
+                                    <span th:text="${apartment.apartmentNumber}" >282</span>
+                                </p>
                             </div>
                             <div class="col-6">
-                                <p><strong>Срок сдачи:</strong> 2023 г.</p>
+                                <p>
+                                    <strong>Срок сдачи:</strong>
+                                    <span th:text="${apartment.floor.house.commissioningDate}" >2025-06-21</span>
+                                </p>
                             </div>
                         </div>
                     </div>

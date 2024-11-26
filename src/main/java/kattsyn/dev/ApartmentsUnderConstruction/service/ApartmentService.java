@@ -54,6 +54,7 @@ public class ApartmentService {
 
     public Apartment save(ApartmentDTO apartmentDTO) {
         Apartment apartment = new Apartment(
+                apartmentDTO.getApartmentNumber(),
                 apartmentDTO.getTotalArea(),
                 apartmentDTO.getLivingArea(),
                 apartmentDTO.getAmountOfRooms(),
@@ -109,6 +110,7 @@ public class ApartmentService {
 
         ApartmentDTO apartmentDTO = new ApartmentDTO();
 
+        apartmentDTO.setApartmentNumber(apartment.get().getApartmentNumber());
         apartmentDTO.setTotalArea(apartment.get().getTotalArea());
         apartmentDTO.setLivingArea(apartment.get().getLivingArea());
         apartmentDTO.setAmountOfRooms(apartment.get().getAmountOfRooms());
@@ -148,6 +150,7 @@ public class ApartmentService {
             return "apartments/edit-apartment";
         }
 
+        apartment.get().setApartmentNumber(apartmentDTO.getApartmentNumber());
         apartment.get().setTotalArea(apartmentDTO.getTotalArea());
         apartment.get().setLivingArea(apartmentDTO.getLivingArea());
         apartment.get().setAmountOfRooms(apartmentDTO.getAmountOfRooms());

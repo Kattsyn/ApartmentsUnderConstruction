@@ -1,9 +1,6 @@
 package kattsyn.dev.ApartmentsUnderConstruction.dtos;
 
-import jakarta.persistence.*;
-import kattsyn.dev.ApartmentsUnderConstruction.entities.Floor;
 import kattsyn.dev.ApartmentsUnderConstruction.entities.Owner;
-import kattsyn.dev.ApartmentsUnderConstruction.entities.SaleStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 public class ApartmentDTO {
 
+    private Integer apartmentNumber;
     private Integer totalArea;
     private Integer livingArea;
     private Byte amountOfRooms;
@@ -28,7 +26,8 @@ public class ApartmentDTO {
     private Long statusId;
     private List<Owner> owners;
 
-    public ApartmentDTO(Integer totalArea, Integer livingArea, Byte amountOfRooms, Byte entranceNumber, Integer apartmentCost, String apartmentPlan) {
+    public ApartmentDTO(Integer apartmentNumber, Integer totalArea, Integer livingArea, Byte amountOfRooms, Byte entranceNumber, Integer apartmentCost, String apartmentPlan) {
+        this.apartmentNumber = apartmentNumber;
         this.totalArea = totalArea;
         this.livingArea = livingArea;
         this.amountOfRooms = amountOfRooms;
