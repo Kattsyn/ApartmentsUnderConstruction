@@ -22,6 +22,11 @@ public class ApartmentController {
         return apartmentService.showInfoPage(model, id);
     }
 
+    @GetMapping("/byFloorId")
+    public String showApartmentsListByFloorId(Model model, @RequestParam Long floorId){
+        return apartmentService.showApartmentsListByFloorId(model, floorId);
+    }
+
 
     @GetMapping({"", "/"})
     public String showApartmentsList(Model model) {
@@ -34,7 +39,7 @@ public class ApartmentController {
     }
 
     @PostMapping("/create")
-    public String createHouse(@Valid @ModelAttribute("apartmentDTO") ApartmentDTO apartmentDTO, BindingResult bindingResult) {
+    public String createApartment(@Valid @ModelAttribute("apartmentDTO") ApartmentDTO apartmentDTO, BindingResult bindingResult) {
         return apartmentService.createApartment(apartmentDTO, bindingResult);
     }
 

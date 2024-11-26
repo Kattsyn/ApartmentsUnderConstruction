@@ -38,6 +38,18 @@ public class ApartmentService {
         return "apartments/info-apartment";
     }
 
+    public String showApartmentsListByFloorId(Model model, @RequestParam Long floorId) {
+        Optional<Floor> floor = floorRepository.findById(floorId);
+        if (floor.isEmpty()) {
+            log.error("Floor id: {} NOT FOUND in showApartmentsListByFloorId", floorId);
+            return "redirect:/floors";
+        }
+
+        List<Apartment> list = apartmentRepository.findByFloor(floor.get());
+        model.addAttribute("apartments", list);
+        return "apartments/index";
+    }
+
     public String showApartmentsList(Model model) {
         List<Apartment> apartments = apartmentRepository.findAll();
         model.addAttribute("apartments", apartments);
@@ -46,8 +58,11 @@ public class ApartmentService {
 
     public String showCreatePage(Model model) {
 
+        List<SaleStatus> saleStatuses = statusRepository.findAll();
+
         ApartmentDTO apartmentDTO = new ApartmentDTO();
         model.addAttribute("apartmentDTO", apartmentDTO);
+        model.addAttribute("saleStatuses", saleStatuses);
         return "apartments/create-apartment";
 
     }
@@ -101,12 +116,13 @@ public class ApartmentService {
     public String showEditPage(Model model, @RequestParam Long id) {
 
         Optional<Apartment> apartment = apartmentRepository.findById(id);
+        List<SaleStatus> saleStatuses = statusRepository.findAll();
 
         if (apartment.isEmpty()) {
             log.error("Apartment id: {} in showEditPage() method NOT FOUND.", id);
             return "redirect:/apartments";
         }
-        model.addAttribute("apartment", apartment);
+        model.addAttribute("apartment", apartment.get());
 
         ApartmentDTO apartmentDTO = new ApartmentDTO();
 
@@ -127,6 +143,7 @@ public class ApartmentService {
         }
 
         model.addAttribute("apartmentDTO", apartmentDTO);
+        model.addAttribute("saleStatuses", saleStatuses);
 
         return "apartments/edit-apartment";
 
