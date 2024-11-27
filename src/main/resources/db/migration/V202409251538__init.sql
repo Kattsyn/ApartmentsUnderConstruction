@@ -65,10 +65,10 @@ CREATE TABLE roles
 CREATE TABLE users
 (
     user_id      BIGSERIAL PRIMARY KEY NOT NULL,
-    username     VARCHAR(50)          NOT NULL,
+    username     VARCHAR(50)           NOT NULL,
     password     VARCHAR(200)          NOT NULL,
-    name         VARCHAR(50)          NOT NULL,
-    surname      VARCHAR(50)          NOT NULL,
+    name         VARCHAR(50)           NOT NULL,
+    surname      VARCHAR(50)           NOT NULL,
     phone_number VARCHAR(20)           NOT NULL,
     email        VARCHAR(80)
 );
