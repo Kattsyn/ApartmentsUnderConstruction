@@ -35,11 +35,19 @@ public class User {
     private String email;
 
     @ManyToMany
-            @JoinTable(
-                    name = "users_roles",
-                    joinColumns = @JoinColumn(name = "user_id"),
-                    inverseJoinColumns = @JoinColumn(name = "role_id")
-            )
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
     List<Role> roles;
 
+    public User(String username, String password, String name, String surname, String phoneNumber, String email) {
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.surname = surname;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+    }
 }

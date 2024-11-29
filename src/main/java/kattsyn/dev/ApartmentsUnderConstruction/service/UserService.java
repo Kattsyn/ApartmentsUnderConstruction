@@ -23,6 +23,10 @@ public class UserService implements UserDetailsService {
                 new UsernameNotFoundException(String.format("User %s not found", username)));
     }
 
+    public User save(User user) {
+        return userRepository.save(user);
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = findByUsername(username);
