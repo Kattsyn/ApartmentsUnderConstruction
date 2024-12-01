@@ -82,11 +82,5 @@ CREATE TABLE users_roles
     foreign key (role_id) references roles (role_id)
 );
 
-CREATE TABLE sessions
-(
-    session_id VARCHAR(255) PRIMARY KEY NOT NULL ,
-    user_id BIGINT NOT NULL,
-    foreign key (user_id) references users (user_id)
-);
 
 
