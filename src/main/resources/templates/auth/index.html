@@ -30,14 +30,14 @@
 
 <div class="login-container">
     <h3 class="text-center mb-4">Вход в систему</h3>
-    <form>
+    <form method="post" th:object="${authRequestDTO}">
         <div class="form-group mb-3">
             <label class="mb-1" for="username">Логин</label>
-            <input type="text" class="form-control" id="username" placeholder="Введите логин" required>
+            <input th:field="${authRequestDTO.username}" type="text" class="form-control" id="username" placeholder="Введите логин" required>
         </div>
         <div class="form-group mb-3">
             <label class="mb-1" for="password">Пароль</label>
-            <input type="password" class="form-control" id="password" placeholder="Введите пароль" required>
+            <input th:field="${authRequestDTO.password}" type="password" class="form-control" id="password" placeholder="Введите пароль" required>
         </div>
         <button type="submit" class="btn btn-primary btn-block">Войти</button>
     </form>
