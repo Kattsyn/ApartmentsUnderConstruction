@@ -21,7 +21,7 @@
     <div class="col-md-8 mx-auto rounded border p-4 m-4">
         <h2 class="text-center mb-5">New Apartment</h2>
 
-        <form method="post" enctype="multipart/form-data" th:object="${apartmentDTO}">
+        <form method="post" th:action="@{/apartments/create}" enctype="multipart/form-data" th:object="${apartmentDTO}">
 
             <div class="row mb-3">
                 <label class="col-sm-4 col-form-label">Floor ID</label>

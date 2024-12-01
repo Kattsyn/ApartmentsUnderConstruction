@@ -1,4 +1,12 @@
 spring:
+  thymeleaf:
+    mode: HTML
+    prefix: classpath:/templates/
+    suffix=: .html
+    extras:
+      springsecurity6:
+        enabled: true
+
   application:
     name: ApartmentsUnderConstruction
   jpa:
@@ -9,3 +17,9 @@ spring:
     url: jdbc:postgresql://localhost:5432/apartments_db
     username: kattsyn
     password: katt
+server:
+  servlet:
+    session:
+      cookie:
+        max-age: 30m
+

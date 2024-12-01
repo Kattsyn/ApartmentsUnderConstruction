@@ -208,21 +208,4 @@ public class ApartmentService {
         return "redirect:/apartments";
     }
 
-    /*
-    public String getApartmentPlan(Model model, Long id) {
-        /*
-        Optional<Floor> floor = floorRepository.findById(id);
-
-        if (floor.isEmpty()) {
-            log.error("Floor id: {} in getFlorPlan() method NOT FOUND.", id);
-            return "floors/index";
-        }
-        model.addAttribute("imageLink", floor.get().getFloorPlan());
-        return "images/index";
-
-
-    }
-         */
-
-
 }
