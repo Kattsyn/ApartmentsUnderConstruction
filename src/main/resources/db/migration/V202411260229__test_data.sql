@@ -51,6 +51,8 @@ SELECT setval('public.users_user_id_seq', (SELECT MAX(user_id) from users));
 
 --Пользователи + роли
 
+INSERT INTO users_roles (user_id, role_id) VALUES (1, 1);
+INSERT INTO users_roles (user_id, role_id) VALUES (1, 2);
 INSERT INTO users_roles (user_id, role_id) VALUES (1, 3);
 
 SELECT setval('public.users_roles_users_roles_id_seq', (SELECT MAX(user_id) from users_roles));

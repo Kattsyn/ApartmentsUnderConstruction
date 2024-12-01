@@ -24,6 +24,7 @@ public class UserService implements UserDetailsService {
     private final PasswordEncoder passwordEncoder;
 
 
+
     public User createUser(RegistrationDTO registrationDTO) {
         User user = new User(
                 registrationDTO.getUsername(),
