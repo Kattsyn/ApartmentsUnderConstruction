@@ -14,7 +14,6 @@ public class Role {
 
     @Column(name = "role_id")
     @Id
-    @GeneratedValue
     private Integer roleId;
     @Column(name = "name")
     private String name;
