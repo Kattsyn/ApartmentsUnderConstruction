@@ -51,6 +51,7 @@ public class HouseService {
         houseDTO.setBuildingStartDate(house.get().getBuildingStartDate());
         houseDTO.setPlannedBuildingEndDate(house.get().getPlannedBuildingEndDate());
         houseDTO.setCommissioningDate(house.get().getCommissioningDate());
+        houseDTO.setHousePlan(house.get().getHousePlan());
 
         model.addAttribute("houseDTO", houseDTO);
 
@@ -70,35 +71,12 @@ public class HouseService {
         if (bindingResult.hasErrors()) {
             return "houses/edit-house";
         }
-        /*
-        //Если бы была новая картинка, то...
-        //deleting old image
-        if (!houseDTO.getImageFile().isEmpty()) {
-            String uploadDir = "public/images/";
-            Path oldImagePath = Paths.get(uploadDir + house.getImageFileName());
-
-            try {
-                Files.delete(oldImagePath);
-            } catch (Exception e) {
-                System.out.println("Exception: " + e.getMessage());
-            }
-            //saving new file
-            MultipartFile image = houseDTO.getImageFile();
-            Date createdAt = new Date();
-            String storageFileName = createdAt.getTime() + "_" + image.getOriginalFile();
-
-            try (InputStream inputStream = image.getInputStream()) {
-                Files.copy(inputStream, Paths.get(uploadDir + storageFileName), StandardCopyOption.REPLACE_EXISTING);
-            }
-
-            house.setImageFileName(storageFileName);
-        }
-        */
         house.get().setAddress(houseDTO.getAddress());
         house.get().setName(houseDTO.getName());
         house.get().setBuildingStartDate(houseDTO.getBuildingStartDate());
         house.get().setPlannedBuildingEndDate(houseDTO.getPlannedBuildingEndDate());
         house.get().setCommissioningDate(houseDTO.getCommissioningDate());
+        house.get().setHousePlan(houseDTO.getHousePlan());
 
         houseRepository.save(house.get());
 
@@ -132,7 +110,8 @@ public class HouseService {
                 houseDTO.getName(),
                 houseDTO.getBuildingStartDate(),
                 houseDTO.getPlannedBuildingEndDate(),
-                houseDTO.getCommissioningDate());
+                houseDTO.getCommissioningDate(),
+                houseDTO.getHousePlan());
 
         return houseRepository.save(house);
     }

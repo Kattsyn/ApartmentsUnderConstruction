@@ -9,10 +9,10 @@ SELECT setval('public.sale_statuses_sale_status_id_seq', (SELECT MAX(sale_status
 
 --Дома
 
-INSERT INTO houses VALUES (1, 'г. Воронеж, ул. Моисеева, 23', 'Афродита', '2024-08-14', '2024-11-09', '2025-02-02');
-INSERT INTO houses VALUES (2, 'г. Воронеж, ул. Новосибирская, 66', 'Зевс', '2024-03-28', '2024-11-12', '2025-06-21');
-INSERT INTO houses VALUES (3, 'г. Воронеж, ул. Богдана Хмельницкого, 91', 'Орел', '2024-09-21', '2024-11-09', '2024-12-26');
-INSERT INTO houses VALUES (4, 'г. Воронеж, ул. 20-Летия октября, 12', 'Феникс', '2024-05-13', '2024-11-11', '2025-05-06');
+INSERT INTO houses VALUES (1, 'г. Воронеж, ул. Моисеева, 23', 'Афродита', '2024-08-14', '2024-11-09', '2025-02-02', 'https://rzv.ru/upload/resize_cache/iblock/0df/730_410_2/d38r5dlgw1ye0yvtsho7jdk8wvwbtbm5.jpg');
+INSERT INTO houses VALUES (2, 'г. Воронеж, ул. Новосибирская, 66', 'Зевс', '2024-03-28', '2024-11-12', '2025-06-21', 'https://rzv.ru/upload/resize_cache/iblock/c45/lcnwo1ns4rrfx9do17p2g2elre2hlfuo/730_410_2/2.jpg');
+INSERT INTO houses VALUES (3, 'г. Воронеж, ул. Богдана Хмельницкого, 91', 'Орел', '2024-09-21', '2024-11-09', '2024-12-26', 'https://rzv.ru/upload/resize_cache/iblock/768/ef8lj4paxuotiaf0hu2k8y02gb8x1ogi/730_410_2/2.jpg');
+INSERT INTO houses VALUES (4, 'г. Воронеж, ул. 20-Летия октября, 12', 'Феникс', '2024-05-13', '2024-11-11', '2025-05-06', 'https://rzv.ru/upload/resize_cache/iblock/589/tuyj4tuk0wbgauycny3wboldr1136cwx/730_410_2/3.jpg');
 
 SELECT setval('public.houses_house_id_seq', (SELECT MAX(house_id) FROM houses));
 

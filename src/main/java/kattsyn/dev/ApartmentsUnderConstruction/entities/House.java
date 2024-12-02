@@ -32,13 +32,16 @@ public class House {
     private LocalDate plannedBuildingEndDate;
     @Column(name = "commissioning_date")
     private LocalDate commissioningDate;
+    @Column(name = "house_plan")
+    private String housePlan;
 
-    public House(String address, String name, LocalDate buildingStartDate, LocalDate plannedBuildingEndDate, LocalDate commissioningDate) {
+    public House(String address, String name, LocalDate buildingStartDate, LocalDate plannedBuildingEndDate, LocalDate commissioningDate, String housePlan) {
         this.address = address;
         this.name = name;
         this.buildingStartDate = buildingStartDate;
         this.plannedBuildingEndDate = plannedBuildingEndDate;
         this.commissioningDate = commissioningDate;
+        this.housePlan = housePlan;
     }
 
 

@@ -5,7 +5,8 @@ CREATE TABLE houses
     name                      VARCHAR(255)  NOT NULL,
     building_start_date       DATE,
     planned_building_end_date DATE,
-    commissioning_date        DATE
+    commissioning_date        DATE,
+    house_plan   VARCHAR(1000)
 );
 
 CREATE TABLE floors
