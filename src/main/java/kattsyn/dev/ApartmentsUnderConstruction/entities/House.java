@@ -32,17 +32,20 @@ public class House {
     private LocalDate plannedBuildingEndDate;
     @Column(name = "commissioning_date")
     private LocalDate commissioningDate;
-    @Column(name = "house_plan")
-    private String housePlan;
 
-    public House(String address, String name, LocalDate buildingStartDate, LocalDate plannedBuildingEndDate, LocalDate commissioningDate, String housePlan) {
+    public House(String address, String name, LocalDate buildingStartDate, LocalDate plannedBuildingEndDate, LocalDate commissioningDate) {
         this.address = address;
         this.name = name;
         this.buildingStartDate = buildingStartDate;
         this.plannedBuildingEndDate = plannedBuildingEndDate;
         this.commissioningDate = commissioningDate;
-        this.housePlan = housePlan;
     }
 
-
+    @ManyToMany
+    @JoinTable(
+            name = "houses_images",
+            joinColumns = @JoinColumn(name = "house_id"),
+            inverseJoinColumns = @JoinColumn(name = "image_id")
+    )
+    List<Image> images;
 }

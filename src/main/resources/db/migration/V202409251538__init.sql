@@ -5,8 +5,20 @@ CREATE TABLE houses
     name                      VARCHAR(255)  NOT NULL,
     building_start_date       DATE,
     planned_building_end_date DATE,
-    commissioning_date        DATE,
-    house_plan   VARCHAR(1000)
+    commissioning_date        DATE
+);
+
+CREATE TABLE images
+(
+    image_id BIGSERIAL PRIMARY KEY NOT NULL,
+    url      VARCHAR(1000)         NOT NULL
+);
+
+CREATE TABLE houses_images
+(
+    houses_images_id BIGSERIAL PRIMARY KEY,
+    house_id         BIGINT NOT NULL,
+    image_id         BIGINT NOT NULL
 );
 
 CREATE TABLE floors

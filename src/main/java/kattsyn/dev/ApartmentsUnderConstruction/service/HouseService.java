@@ -51,7 +51,6 @@ public class HouseService {
         houseDTO.setBuildingStartDate(house.get().getBuildingStartDate());
         houseDTO.setPlannedBuildingEndDate(house.get().getPlannedBuildingEndDate());
         houseDTO.setCommissioningDate(house.get().getCommissioningDate());
-        houseDTO.setHousePlan(house.get().getHousePlan());
 
         model.addAttribute("houseDTO", houseDTO);
 
@@ -76,7 +75,6 @@ public class HouseService {
         house.get().setBuildingStartDate(houseDTO.getBuildingStartDate());
         house.get().setPlannedBuildingEndDate(houseDTO.getPlannedBuildingEndDate());
         house.get().setCommissioningDate(houseDTO.getCommissioningDate());
-        house.get().setHousePlan(houseDTO.getHousePlan());
 
         houseRepository.save(house.get());
 
@@ -110,8 +108,7 @@ public class HouseService {
                 houseDTO.getName(),
                 houseDTO.getBuildingStartDate(),
                 houseDTO.getPlannedBuildingEndDate(),
-                houseDTO.getCommissioningDate(),
-                houseDTO.getHousePlan());
+                houseDTO.getCommissioningDate());
 
         return houseRepository.save(house);
     }
