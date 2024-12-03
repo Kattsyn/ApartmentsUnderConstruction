@@ -70,30 +70,6 @@ public class HouseService {
         if (bindingResult.hasErrors()) {
             return "houses/edit-house";
         }
-        /*
-        //Если бы была новая картинка, то...
-        //deleting old image
-        if (!houseDTO.getImageFile().isEmpty()) {
-            String uploadDir = "public/images/";
-            Path oldImagePath = Paths.get(uploadDir + house.getImageFileName());
-
-            try {
-                Files.delete(oldImagePath);
-            } catch (Exception e) {
-                System.out.println("Exception: " + e.getMessage());
-            }
-            //saving new file
-            MultipartFile image = houseDTO.getImageFile();
-            Date createdAt = new Date();
-            String storageFileName = createdAt.getTime() + "_" + image.getOriginalFile();
-
-            try (InputStream inputStream = image.getInputStream()) {
-                Files.copy(inputStream, Paths.get(uploadDir + storageFileName), StandardCopyOption.REPLACE_EXISTING);
-            }
-
-            house.setImageFileName(storageFileName);
-        }
-        */
         house.get().setAddress(houseDTO.getAddress());
         house.get().setName(houseDTO.getName());
         house.get().setBuildingStartDate(houseDTO.getBuildingStartDate());

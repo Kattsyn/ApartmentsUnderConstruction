@@ -8,6 +8,19 @@ CREATE TABLE houses
     commissioning_date        DATE
 );
 
+CREATE TABLE images
+(
+    image_id BIGSERIAL PRIMARY KEY NOT NULL,
+    url      VARCHAR(1000)         NOT NULL
+);
+
+CREATE TABLE houses_images
+(
+    houses_images_id BIGSERIAL PRIMARY KEY,
+    house_id         BIGINT NOT NULL,
+    image_id         BIGINT NOT NULL
+);
+
 CREATE TABLE floors
 (
     floor_id     BIGSERIAL PRIMARY KEY,

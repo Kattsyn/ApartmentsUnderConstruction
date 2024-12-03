@@ -18,6 +18,7 @@ public class HouseDTO {
     private LocalDate buildingStartDate;
     private LocalDate plannedBuildingEndDate;
     private LocalDate commissioningDate;
+    private String housePlan;
 
     /*
     public void setPlannedBuildingEndDate(LocalDate plannedBuildingEndDate) {

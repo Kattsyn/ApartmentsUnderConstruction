@@ -41,5 +41,11 @@ public class House {
         this.commissioningDate = commissioningDate;
     }
 
-
+    @ManyToMany
+    @JoinTable(
+            name = "houses_images",
+            joinColumns = @JoinColumn(name = "house_id"),
+            inverseJoinColumns = @JoinColumn(name = "image_id")
+    )
+    List<Image> images;
 }
