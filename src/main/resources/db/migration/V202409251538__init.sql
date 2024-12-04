@@ -18,7 +18,9 @@ CREATE TABLE houses_images
 (
     houses_images_id BIGSERIAL PRIMARY KEY,
     house_id         BIGINT NOT NULL,
-    image_id         BIGINT NOT NULL
+    image_id         BIGINT NOT NULL,
+    foreign key (house_id) references houses (house_id),
+    foreign key (image_id) references images (image_id)
 );
 
 CREATE TABLE floors
