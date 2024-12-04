@@ -9,6 +9,9 @@ import kattsyn.dev.ApartmentsUnderConstruction.repositories.FloorRepository;
 import kattsyn.dev.ApartmentsUnderConstruction.repositories.StatusRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,6 +41,13 @@ public class ApartmentService {
         return "apartments/info-apartment";
     }
 
+    public String showApartmentsListPage(Model model, int pageNumber, int count) {
+        Page<Apartment> page = apartmentRepository.findAll(PageRequest.of(pageNumber, count, Sort.by("floor.house.name")));
+        model.addAttribute("apartments", page.getContent());
+
+        return "apartments/index";
+    }
+
     public String showApartmentsListByFloorId(Model model, @RequestParam Long floorId) {
         Optional<Floor> floor = floorRepository.findById(floorId);
         if (floor.isEmpty()) {
@@ -51,7 +61,7 @@ public class ApartmentService {
     }
 
     public String showApartmentsList(Model model) {
-        List<Apartment> apartments = apartmentRepository.findAll();
+        List<Apartment> apartments = apartmentRepository.findAll(Sort.by("floor.house.name"));
         model.addAttribute("apartments", apartments);
         return "apartments/index";
     }

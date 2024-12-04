@@ -34,6 +34,15 @@ public class ApartmentController {
         return apartmentService.showApartmentsList(model);
     }
 
+
+    @GetMapping( "/pages")
+    public String showApartmentsListPage(
+            Model model,
+            @RequestParam (defaultValue = "0") int pageNumber,
+            @RequestParam (defaultValue = "2") int count) {
+        return apartmentService.showApartmentsListPage(model, pageNumber, count);
+    }
+
     @PreAuthorize("hasRole('ROLE_MANAGER')")
     @GetMapping("/create")
     public String showCreatePage(Model model) {
