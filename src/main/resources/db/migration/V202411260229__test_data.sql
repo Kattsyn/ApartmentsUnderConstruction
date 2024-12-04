@@ -22,8 +22,7 @@ SELECT setval('public.houses_house_id_seq', (SELECT MAX(house_id) FROM houses));
 --Этажи
 
 INSERT INTO floors (floor_id, house_id, floor_number, floor_plan)
-VALUES (2, 1, 5,
-        'https://img2.sibdom.ru/images/photo_594_446/houses/photo_plan_floor/81/8162/816292c8a5548e5edd4b281edcb3f31e.jpg');
+VALUES (2, 1, 5,'https://rzv.ru/upload/resized_cache_custom/xml_00165_000000674_000007073_Plan1_b3f37fa671ca11ef867fb3409566c4e4_726x10000.jpg');
 INSERT INTO floors (floor_id, house_id, floor_number, floor_plan)
 VALUES (3, 2, 3, 'https://rzv.ru/upload/resized_cache_custom/xml_00132_000000444_3_etazh____OBShch_1920x1920.jpg');
 INSERT INTO floors (floor_id, house_id, floor_number, floor_plan)
@@ -95,26 +94,42 @@ SELECT setval('public.users_roles_users_roles_id_seq', (SELECT MAX(user_id) from
 
 --Фотографии
 
-INSERT INTO images (image_id, url) VALUES (1, 'https://rzv.ru/upload/resize_cache/iblock/0df/730_410_2/d38r5dlgw1ye0yvtsho7jdk8wvwbtbm5.jpg');
-INSERT INTO images (image_id, url) VALUES (2, 'https://rzv.ru/upload/resize_cache/iblock/c45/lcnwo1ns4rrfx9do17p2g2elre2hlfuo/730_410_2/2.jpg');
-INSERT INTO images (image_id, url) VALUES (3, 'https://rzv.ru/upload/resize_cache/iblock/768/ef8lj4paxuotiaf0hu2k8y02gb8x1ogi/730_410_2/2.jpg');
-INSERT INTO images (image_id, url) VALUES (4, 'https://rzv.ru/upload/resize_cache/iblock/589/tuyj4tuk0wbgauycny3wboldr1136cwx/730_410_2/3.jpg');
-INSERT INTO images (image_id, url) VALUES (5, 'https://rzv.ru/upload/resize_cache/iblock/0ed/hpz1vmqw7b6fvcp5xurhovjv16jfteps/392_255_2/1.jpg');
-INSERT INTO images (image_id, url) VALUES (6, 'https://rzv.ru/upload/resize_cache/iblock/935/1320_600_2/zrp8u4pbawyk98s1574y2atwibjbo1y5.jpg');
-INSERT INTO images (image_id, url) VALUES (7, 'https://rzv.ru/upload/resize_cache/iblock/b17/bpi8vutb5ddcx0n140ogwut3k3dekb43/1320_600_2/3.jpg');
-INSERT INTO images (image_id, url) VALUES (8, 'https://rzv.ru/upload/resize_cache/iblock/5b3/i3ymzkt2rvg8jmam07kdf7u1tbqh0snc/1320_600_2/7.jpg');
+INSERT INTO images (image_id, url)
+VALUES (1, 'https://rzv.ru/upload/resize_cache/iblock/0df/730_410_2/d38r5dlgw1ye0yvtsho7jdk8wvwbtbm5.jpg');
+INSERT INTO images (image_id, url)
+VALUES (2, 'https://rzv.ru/upload/resize_cache/iblock/c45/lcnwo1ns4rrfx9do17p2g2elre2hlfuo/730_410_2/2.jpg');
+INSERT INTO images (image_id, url)
+VALUES (3, 'https://rzv.ru/upload/resize_cache/iblock/768/ef8lj4paxuotiaf0hu2k8y02gb8x1ogi/730_410_2/2.jpg');
+INSERT INTO images (image_id, url)
+VALUES (4, 'https://rzv.ru/upload/resize_cache/iblock/589/tuyj4tuk0wbgauycny3wboldr1136cwx/730_410_2/3.jpg');
+INSERT INTO images (image_id, url)
+VALUES (5, 'https://rzv.ru/upload/resize_cache/iblock/0ed/hpz1vmqw7b6fvcp5xurhovjv16jfteps/392_255_2/1.jpg');
+INSERT INTO images (image_id, url)
+VALUES (6, 'https://rzv.ru/upload/resize_cache/iblock/935/1320_600_2/zrp8u4pbawyk98s1574y2atwibjbo1y5.jpg');
+INSERT INTO images (image_id, url)
+VALUES (7, 'https://rzv.ru/upload/resize_cache/iblock/b17/bpi8vutb5ddcx0n140ogwut3k3dekb43/1320_600_2/3.jpg');
+INSERT INTO images (image_id, url)
+VALUES (8, 'https://rzv.ru/upload/resize_cache/iblock/5b3/i3ymzkt2rvg8jmam07kdf7u1tbqh0snc/1320_600_2/7.jpg');
 
 SELECT setval('public.images_image_id_seq', (SELECT MAX(image_id) from public.images));
 
 --Дома + фотографии
 
-INSERT INTO houses_images (house_id, image_id) values (1, 1);
-INSERT INTO houses_images (house_id, image_id) values (2, 2);
-INSERT INTO houses_images (house_id, image_id) values (3, 3);
-INSERT INTO houses_images (house_id, image_id) values (4, 4);
-INSERT INTO houses_images (house_id, image_id) values (2, 5);
-INSERT INTO houses_images (house_id, image_id) values (1, 6);
-INSERT INTO houses_images (house_id, image_id) values (3, 7);
-INSERT INTO houses_images (house_id, image_id) values (3, 8);
+INSERT INTO houses_images (house_id, image_id)
+values (1, 1);
+INSERT INTO houses_images (house_id, image_id)
+values (2, 2);
+INSERT INTO houses_images (house_id, image_id)
+values (3, 3);
+INSERT INTO houses_images (house_id, image_id)
+values (4, 4);
+INSERT INTO houses_images (house_id, image_id)
+values (2, 5);
+INSERT INTO houses_images (house_id, image_id)
+values (1, 6);
+INSERT INTO houses_images (house_id, image_id)
+values (3, 7);
+INSERT INTO houses_images (house_id, image_id)
+values (3, 8);
 
 SELECT setval('public.houses_images_houses_images_id_seq', (SELECT MAX(houses_images_id) from public.houses_images));
