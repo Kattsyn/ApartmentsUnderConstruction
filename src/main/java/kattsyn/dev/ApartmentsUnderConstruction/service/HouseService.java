@@ -5,6 +5,8 @@ import kattsyn.dev.ApartmentsUnderConstruction.entities.House;
 import kattsyn.dev.ApartmentsUnderConstruction.repositories.HouseRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -31,9 +33,9 @@ public class HouseService {
         return "houses/create-house";
     }
 
-    public String showHouseList(Model model) {
-        List<House> houses = findAll();
-        model.addAttribute("houses", houses);
+    public String showHouseList(Model model, int pageNumber, int count) {
+        Page<House> houses = houseRepository.findAll(PageRequest.of(pageNumber, count, Sort.by("name")));
+        model.addAttribute("houses", houses.getContent());
         return "houses/index";
     }
 

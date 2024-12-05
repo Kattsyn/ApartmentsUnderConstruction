@@ -8,6 +8,9 @@ import kattsyn.dev.ApartmentsUnderConstruction.repositories.FloorRepository;
 import kattsyn.dev.ApartmentsUnderConstruction.repositories.HouseRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -44,9 +47,9 @@ public class FloorService {
         return floorRepository.save(floor);
     }
 
-    public String showFloorsList(Model model) {
-        List<Floor> floors = floorRepository.findAll();
-        model.addAttribute("floors", floors);
+    public String showFloorsList(Model model, int pageNumber, int count) {
+        Page<Floor> floors = floorRepository.findAll(PageRequest.of(pageNumber, count, Sort.by("floor_id")));
+        model.addAttribute("floors", floors.getContent());
         return "floors/index";
     }
 
