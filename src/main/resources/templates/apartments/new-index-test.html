@@ -46,149 +46,19 @@
 
     <h1 class="text-center p-4">Выбор квартиры</h1>
 
-<form action="/apartments/byFilter" th:object="filter">
-    <div class="row row-cols-md-3 g-3 p-3 " style="background-color: #f5f6fa; border-radius: 5px">
-        <div class="col">
-            <p class="text-secondary fs-6">Выберите регион</p>
-            <select class="form-select" aria-label="Пример выбора по умолчанию" style="padding: 10px"
-                    th:field="${filter.region}">
-                <option selected
-                        <!--
-                        th:value="${apartment.status.saleStatusId}"
-                        th:text="${apartment.status.name}"
-                -->
-                >Все регионы
-                </option>
-                <option
-                        <!--
-                        th:each="saleStatus : ${saleStatuses}"
-                        th:value="${saleStatus.saleStatusId}"
-                        th:text="${saleStatus.name}" value="0">Один
-                        -->
-                </option>
-            </select>
-        </div>
-        <div class="col">
-            <p class="text-secondary fs-6">Выберите объект</p>
-            <select class="form-select" aria-label="Пример выбора по умолчанию" style="padding: 10px"
-                    th:field="${filter.houseName}">
-                <option selected
-                        <!--
-                        th:value="${apartment.status.saleStatusId}"
-                        th:text="${apartment.status.name}"
-                        -->
-                >Все объекты
-                </option>
-                <option
-                <!--
-                        th:each="saleStatus : ${saleStatuses}"
-                        th:value="${saleStatus.saleStatusId}"
-                        th:text="${saleStatus.name}" value="0">Один
-                        -->
-                </option>
-            </select>
-        </div>
-        <div class="col">
-            <p class="text-secondary fs-6">Выберите количество комнат</p>
-            <select class="form-select" aria-label="Пример выбора по умолчанию" style="padding: 10px"
-                    th:field="${filter.amountOfRooms}">
-                <option selected
-                        <!--
-                        th:value="${apartment.status.saleStatusId}"
-                        th:text="${apartment.status.name}"
-                        -->
-                >Все
-                </option>
-                <!--
-                <option
-                        th:each="saleStatus : ${saleStatuses}"
-                        th:value="${saleStatus.saleStatusId}"
-                        th:text="${saleStatus.name}" value="0">Один
-                </option>
-                -->
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-            </select>
-        </div>
-        <div class="col">
-            <p class="text-secondary fs-6">Укажите этаж</p>
-            <select class="form-select" aria-label="Пример выбора по умолчанию" style="padding: 10px"
-                    th:field="${apartmentDTO.statusId}">
-                <option selected
-                <!--
-                th:value="${apartment.status.saleStatusId}"
-                th:text="${apartment.status.name}"
-                -->
-        >Любой
-        </option>
-                <!--
-        <option
-                th:each="saleStatus : ${saleStatuses}"
-                th:value="${saleStatus.saleStatusId}"
-                th:text="${saleStatus.name}" value="0">Один
-        </option>
-        -->
-        <option value="1">1</option>
-        <option value="5">5</option>
-        <option value="18">18</option>
-    </select>
-</div>
-<div class="col">
-    <p class="text-secondary fs-6">Площадь квартиры</p>
-    <label>
-        <input type="number" th:field="${filter.minTotalArea}">
-    </label>
-    <label>
-        <input type="number" th:field="${filter.maxTotalArea}">
-    </label>
+    <form action="/apartments/byFilter">
+        <label for="minApartmentCost"> minCost
+            <input id="minApartmentCost" type="number" name="minApartmentCost">
+        </label>
+        <label for="maxApartmentCost"> maxCost
+            <input id="maxApartmentCost" type="number" name="maxApartmentCost">
+        </label>
+        <label for="amountOfRooms"> amountOfRooms
+            <input id="amountOfRooms" type="number" name="amountOfRooms">
+        </label>
 
-    <!--
-    <select class="form-select" aria-label="Пример выбора по умолчанию" style="padding: 10px"
-            th:field="${apartmentDTO.statusId}">
-        <option selected
-                th:value="${apartment.status.saleStatusId}"
-                th:text="${apartment.status.name}"
-        >Добавить два поля от и до
-        </option>
-        <option
-                th:each="saleStatus : ${saleStatuses}"
-                th:value="${saleStatus.saleStatusId}"
-                th:text="${saleStatus.name}" value="0">Один
-        </option>
-    </select>
-    -->
-</div>
-<div class="col">
-    <p class="text-secondary fs-6">Стоимость квартиры, млн ₽</p>
-
-    <label>
-        <input type="number" th:field="${filter.minTotalArea}">
-    </label>
-    <label>
-        <input type="number" th:field="${filter.maxTotalArea}">
-    </label>
-    <!--
-    <select class="form-select" aria-label="Пример выбора по умолчанию" style="padding: 10px"
-            th:field="${apartmentDTO.statusId}">
-        <option selected
-                th:value="${apartment.status.saleStatusId}"
-                th:text="${apartment.status.name}"
-        >Добавить два поля от и до
-        </option>
-        <option
-                th:each="saleStatus : ${saleStatuses}"
-                th:value="${saleStatus.saleStatusId}"
-                th:text="${saleStatus.name}" value="0">Один
-        </option>
-    </select>
-    -->
-
-</div>
-</div>
-<button type="submit">FILTER</button>
-</form>
--->
+        <button type="submit" >SUBMIIIT</button>
+    </form>
 
     <div class="container my-5">
 

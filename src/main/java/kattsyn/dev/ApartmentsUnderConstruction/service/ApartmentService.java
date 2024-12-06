@@ -1,6 +1,7 @@
 package kattsyn.dev.ApartmentsUnderConstruction.service;
 
 import kattsyn.dev.ApartmentsUnderConstruction.dtos.ApartmentDTO;
+import kattsyn.dev.ApartmentsUnderConstruction.dtos.filters.ApartmentFilter;
 import kattsyn.dev.ApartmentsUnderConstruction.entities.Apartment;
 import kattsyn.dev.ApartmentsUnderConstruction.entities.Floor;
 import kattsyn.dev.ApartmentsUnderConstruction.entities.SaleStatus;
@@ -31,6 +32,11 @@ public class ApartmentService {
     private final FloorRepository floorRepository;
     private final StatusRepository statusRepository;
 
+    public String findAllByFilter(Model model, ApartmentFilter filter) {
+        model.addAttribute("apartments", apartmentRepository.findAllByFilter(filter));
+        return "apartments/new-index-test";
+    }
+
     public String showInfoPage(Model model, Long id) {
         Optional<Apartment> apartment = apartmentRepository.findById(id);
         if (apartment.isEmpty()) {
@@ -45,7 +51,7 @@ public class ApartmentService {
         Page<Apartment> page = apartmentRepository.findAll(PageRequest.of(pageNumber, count, Sort.by("floor.house.name")));
         model.addAttribute("apartments", page.getContent());
 
-        return "apartments/index";
+        return "apartments/new-index-test";
     }
 
     public String showApartmentsListByFloorId(Model model, @RequestParam Long floorId) {

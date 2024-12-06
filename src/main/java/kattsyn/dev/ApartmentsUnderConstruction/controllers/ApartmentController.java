@@ -1,6 +1,7 @@
 package kattsyn.dev.ApartmentsUnderConstruction.controllers;
 
 import kattsyn.dev.ApartmentsUnderConstruction.dtos.ApartmentDTO;
+import kattsyn.dev.ApartmentsUnderConstruction.dtos.filters.ApartmentFilter;
 import kattsyn.dev.ApartmentsUnderConstruction.service.ApartmentService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,22 +25,31 @@ public class ApartmentController {
     }
 
     @GetMapping("/byFloorId")
-    public String showApartmentsListByFloorId(Model model, @RequestParam Long floorId){
+    public String showApartmentsListByFloorId(Model model, @RequestParam Long floorId) {
         return apartmentService.showApartmentsListByFloorId(model, floorId);
     }
 
-
+/*
     @GetMapping({"", "/"})
     public String showApartmentsList(Model model) {
         return apartmentService.showApartmentsList(model);
     }
 
+ */
 
-    @GetMapping( "/pages")
+    @GetMapping("/byFilter")
+    public String showApartmentsListPageByFilter(
+            Model model,
+            @ModelAttribute("filter") ApartmentFilter filter
+    ) {
+        return apartmentService.findAllByFilter(model, filter);
+    }
+
+    @GetMapping({"", "/"})
     public String showApartmentsListPage(
             Model model,
-            @RequestParam (defaultValue = "0") int pageNumber,
-            @RequestParam (defaultValue = "2") int count) {
+            @RequestParam(defaultValue = "0") int pageNumber,
+            @RequestParam(defaultValue = "5") int count) {
         return apartmentService.showApartmentsListPage(model, pageNumber, count);
     }
 
@@ -64,9 +74,9 @@ public class ApartmentController {
     @PreAuthorize("hasRole('ROLE_MANAGER')")
     @PostMapping("/edit")
     public String editApartment(Model model,
-                            @RequestParam Long id,
-                            ApartmentDTO apartmentDTO,
-                            BindingResult bindingResult) {
+                                @RequestParam Long id,
+                                ApartmentDTO apartmentDTO,
+                                BindingResult bindingResult) {
         return apartmentService.editApartment(model, id, apartmentDTO, bindingResult);
     }
 
