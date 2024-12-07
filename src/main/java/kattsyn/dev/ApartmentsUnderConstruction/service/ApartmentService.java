@@ -8,10 +8,12 @@ import kattsyn.dev.ApartmentsUnderConstruction.entities.SaleStatus;
 import kattsyn.dev.ApartmentsUnderConstruction.repositories.ApartmentRepository;
 import kattsyn.dev.ApartmentsUnderConstruction.repositories.FloorRepository;
 import kattsyn.dev.ApartmentsUnderConstruction.repositories.StatusRepository;
+import kattsyn.dev.ApartmentsUnderConstruction.specifications.ApartmentSpecification;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -33,8 +35,25 @@ public class ApartmentService {
     private final StatusRepository statusRepository;
 
     public String findAllByFilter(Model model, ApartmentFilter filter) {
-        model.addAttribute("apartments", apartmentRepository.findAllByFilter(filter));
+        //model.addAttribute("apartments", apartmentRepository.findAllByFilter(filter));
+        ApartmentSpecification specification = new ApartmentSpecification(filter);
+        log.info(filter.toString());
+        model.addAttribute("apartments", apartmentRepository.findAll(specification));
+        model.addAttribute("distinctApartmentsByAmountOfRooms", apartmentRepository.findDistinctRooms());
+
         return "apartments/new-index-test";
+    }
+
+    public List<Byte> findDistinctAmountOfRooms() {
+        return apartmentRepository.findDistinctRooms();
+    }
+
+    public Page<Apartment> getFilteredApartmentPage(ApartmentFilter filter, int pageNumber, int count) {
+        ApartmentSpecification specification = new ApartmentSpecification(filter);
+        log.info(filter.toString());
+
+        Pageable page = PageRequest.of(pageNumber, count);
+        return apartmentRepository.findAll(specification, page);
     }
 
     public String showInfoPage(Model model, Long id) {
@@ -50,6 +69,7 @@ public class ApartmentService {
     public String showApartmentsListPage(Model model, int pageNumber, int count) {
         Page<Apartment> page = apartmentRepository.findAll(PageRequest.of(pageNumber, count, Sort.by("floor.house.name")));
         model.addAttribute("apartments", page.getContent());
+        model.addAttribute("distinctApartmentsByAmountOfRooms", apartmentRepository.findDistinctRooms());
 
         return "apartments/new-index-test";
     }

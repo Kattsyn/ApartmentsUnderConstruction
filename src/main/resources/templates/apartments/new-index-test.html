@@ -46,15 +46,38 @@
 
     <h1 class="text-center p-4">Выбор квартиры</h1>
 
-    <form action="/apartments/byFilter">
+    <form th:action="@{/apartments/}" method="get" enctype="multipart/form-data" th:object="${filter}">
         <label for="minApartmentCost"> minCost
-            <input id="minApartmentCost" type="number" name="minApartmentCost">
+            <input id="minApartmentCost" type="number" name="minApartmentCost" th:field="*{minApartmentCost}">
         </label>
         <label for="maxApartmentCost"> maxCost
-            <input id="maxApartmentCost" type="number" name="maxApartmentCost">
+            <input id="maxApartmentCost" type="number" name="maxApartmentCost" th:field="*{maxApartmentCost}">
         </label>
         <label for="amountOfRooms"> amountOfRooms
-            <input id="amountOfRooms" type="number" name="amountOfRooms">
+            <select id="amountOfRooms" class="form-select" aria-label="Пример выбора по умолчанию" style="padding: 10px" th:field="*{amountOfRooms}">
+                <option selected
+                        th:value="0"
+                >Все
+                </option>
+                <option
+                th:each="aps : ${distinctApartmentsByAmountOfRooms}"
+                th:value="${aps}"
+                th:text="${aps}" value="0">Один
+                </option>
+            </select>
+        </label>
+        <label for="housesName"> amountOfRooms
+            <select id="housesName" class="form-select" aria-label="Пример выбора по умолчанию" style="padding: 10px" th:field="*{houseName}">
+                <option selected
+                        value=""
+                >Все
+                </option>
+                <option
+                        th:each="houseName : ${housesNames}"
+                        th:value="${houseName}"
+                        th:text="${houseName}" value="0">Один
+                </option>
+            </select>
         </label>
 
         <button type="submit" >SUBMIIIT</button>

@@ -29,6 +29,10 @@ public class FloorService {
     private final FloorRepository floorRepository;
     private final HouseRepository houseRepository;
 
+    public List<Byte> getDistinctFloorNumbers() {
+        return floorRepository.distinctFloorNumbers();
+    }
+
     public Floor save(FloorDTO floorDTO) {
 
         Floor floor = new Floor(

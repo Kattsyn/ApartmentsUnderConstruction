@@ -1,5 +1,5 @@
 body {
-    font-family: "Parkinsans", sans-serif;
+    font-family: "Roboto", sans-serif;
 }
 
 .header-title {
@@ -24,4 +24,43 @@ body {
 .carousel-inner img {
     max-height: 700px; /* Ограничение высоты картинки */
     object-fit: cover; /* Соотношение сторон сохраняется */
+}
+
+.form-select {
+    width: 300%;
+    padding: 10px;
+}
+
+.form-control {
+    width: 90%;
+    margin: 5px;
+    padding: 10px;
+}
+#filterMenu {
+    background-color: #f5f6fa;
+    border-radius: 5px
+}
+#getApartmentsButton {
+    padding: 10px;
+    background-color: #007bff;
+    color: #f5f6fa;
+    width: 200px;
+}
+#clearFilters {
+    padding: 10px;
+}
+
+.pagination {
+    justify-content: center;
+    margin-top: 30px;
+}
+.page-item.disabled .page-link {
+    background-color: #f8f9fa;
+    border-color: #f8f9fa;
+}
+.page-link {
+    color: #007bff;
+}
+.page-link:hover {
+    color: #0056b3;
 }

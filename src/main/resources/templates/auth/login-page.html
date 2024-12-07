@@ -15,6 +15,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        position: relative;
     }
     .login-container {
         width: 100%;
@@ -24,12 +25,23 @@
         border-radius: 8px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
+    .back-link {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        font-size: 16px;
+        color: #007bff;
+        text-decoration: none;
+    }
+    .back-link:hover {
+        text-decoration: underline;
+    }
 </style>
 
 <body>
 
-
-
+<!-- Ссылка на главную страницу -->
+<a href="/" class="back-link">Главная</a>
 
 <div class="login-container">
     <h3 class="text-center mb-4">Вход в систему</h3>

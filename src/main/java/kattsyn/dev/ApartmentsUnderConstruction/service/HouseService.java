@@ -23,9 +23,6 @@ public class HouseService {
 
     private final HouseRepository houseRepository;
 
-    public List<House> findAll() {
-        return houseRepository.findAll(Sort.by(Sort.Direction.DESC, "houseId"));
-    }
 
     public String showCreatePage(Model model) {
         HouseDTO houseDTO = new HouseDTO();
@@ -37,6 +34,10 @@ public class HouseService {
         Page<House> houses = houseRepository.findAll(PageRequest.of(pageNumber, count, Sort.by("name")));
         model.addAttribute("houses", houses.getContent());
         return "houses/index";
+    }
+
+    public List<String> getDistinctHousesNames() {
+        return houseRepository.getDistinctNames();
     }
 
     public String showEditPage(Model model, @RequestParam Long id) {
