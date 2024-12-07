@@ -18,8 +18,11 @@ public class FloorController {
     private final FloorService floorService;
 
     @GetMapping({"", "/"})
-    public String showFloorsList(Model model) {
-        return floorService.showFloorsList(model);
+    public String showFloorsList(
+            Model model,
+            @RequestParam (defaultValue = "0") int pageNumber,
+            @RequestParam (defaultValue = "5") int count) {
+        return floorService.showFloorsList(model, pageNumber, count);
     }
 
     @GetMapping("/getFloorPlan")

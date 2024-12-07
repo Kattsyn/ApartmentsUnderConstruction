@@ -21,8 +21,11 @@ public class HouseController {
 
 
     @GetMapping({"", "/"})
-    public String showHouseList(Model model) {
-        return houseService.showHouseList(model);
+    public String showHouseList(
+            Model model,
+            @RequestParam (defaultValue = "0") int pageNumber,
+            @RequestParam (defaultValue = "5") int count) {
+        return houseService.showHouseList(model, pageNumber, count);
     }
 
     @GetMapping("/create")
