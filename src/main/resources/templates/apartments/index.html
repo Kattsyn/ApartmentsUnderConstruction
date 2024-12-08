@@ -224,21 +224,21 @@
                     </a>
                 </li>
                 <li class="page-item" th:classappend="${currentPage == 0 ? 'disabled' : ''}">
-                    <a class="page-link" th:href="@{/apartments/?currentPage=${currentPage - 1}}" aria-label="Previous">
+                    <a class="page-link" th:href="@{/apartments/?currentPage={currentPage}(currentPage=${currentPage - 1})}" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
                 <li class="page-item" th:each="pageNum : ${pageNumbers}">
-                    <a class="page-link" th:href="|@{/apartments/?currentPage=${pageNum}}|"
+                    <a class="page-link" th:href="@{/apartments/?currentPage={pageNum}(pageNum=${pageNum})}"
                        th:text="${pageNum + 1}" aria-label="Page ${pageNum + 1}"></a>
                 </li>
                 <li class="page-item" th:classappend="${currentPage == totalPages - 1 ? 'disabled' : ''}">
-                    <a class="page-link" th:href="@{/apartments/?currentPage=${currentPage + 1}}" aria-label="Next">
+                    <a class="page-link" th:href="@{/apartments/?currentPage={currentPage}(currentPage=${currentPage + 1})}" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
                 <li class="page-item" th:classappend="${currentPage == totalPages - 1 ? 'disabled' : ''}">
-                    <a class="page-link" th:href="@{/apartments/?currentPage=${totalPages - 1}}" aria-label="Last">
+                    <a class="page-link" th:href="@{/apartments/?currentPage={currentPage}(currentPage=${totalPages - 1})}" aria-label="Last">
                         <span aria-hidden="true">&raquo;&raquo;</span>
                     </a>
                 </li>
