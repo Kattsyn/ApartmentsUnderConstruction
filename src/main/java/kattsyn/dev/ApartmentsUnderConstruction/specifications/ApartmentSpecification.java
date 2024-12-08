@@ -5,6 +5,7 @@ import kattsyn.dev.ApartmentsUnderConstruction.dtos.filters.ApartmentFilter;
 import kattsyn.dev.ApartmentsUnderConstruction.entities.Apartment;
 import kattsyn.dev.ApartmentsUnderConstruction.entities.Floor;
 import kattsyn.dev.ApartmentsUnderConstruction.entities.House;
+import kattsyn.dev.ApartmentsUnderConstruction.entities.Region;
 import lombok.AllArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -28,6 +29,7 @@ public class ApartmentSpecification implements Specification<Apartment> {
          */
         Join<Apartment, Floor> floorJoin = root.join("floor", JoinType.INNER);
         Join<Floor, House> houseJoin = floorJoin.join("house", JoinType.INNER);
+        Join<House, Region> regionJoin = houseJoin.join("region", JoinType.INNER);
 
         // Фильтрация по количеству комнат
         if (filter.getAmountOfRooms() != 0) {
@@ -58,6 +60,12 @@ public class ApartmentSpecification implements Specification<Apartment> {
         if (filter.getHouseName() != null && !filter.getHouseName().isEmpty()) {
             predicate = criteriaBuilder.and(predicate, criteriaBuilder.like(houseJoin.get("name"), filter.getHouseName()));
         }
+
+        // Фильтрация по имени региона
+        if (filter.getRegionName() != null && !filter.getRegionName().isEmpty()) {
+            predicate = criteriaBuilder.and(predicate, criteriaBuilder.like(regionJoin.get("name"), filter.getRegionName()));
+        }
+
 
         // Фильтрация по номеру этажа
         if (filter.getFloorNumber() != 0) {

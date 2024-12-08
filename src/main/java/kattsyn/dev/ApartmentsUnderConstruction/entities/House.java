@@ -47,5 +47,8 @@ public class House {
             joinColumns = @JoinColumn(name = "house_id"),
             inverseJoinColumns = @JoinColumn(name = "image_id")
     )
-    List<Image> images;
+    private List<Image> images;
+    @ManyToOne
+    @JoinColumn(name = "region_id")
+    private Region region;
 }
