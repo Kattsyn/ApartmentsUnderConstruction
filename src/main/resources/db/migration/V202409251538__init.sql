@@ -1,11 +1,19 @@
+CREATE TABLE regions
+(
+    region_id SERIAL PRIMARY KEY NOT NULL,
+    name      VARCHAR(255)       NOT NULL
+);
+
 CREATE TABLE houses
 (
     house_id                  BIGSERIAL PRIMARY KEY,
+    region_id                 INTEGER       NOT NULL,
     address                   VARCHAR(1000) NOT NULL,
     name                      VARCHAR(255)  NOT NULL,
     building_start_date       DATE,
     planned_building_end_date DATE,
-    commissioning_date        DATE
+    commissioning_date        DATE,
+    foreign key (region_id) references  regions (region_id)
 );
 
 CREATE TABLE images

@@ -6,6 +6,7 @@ import kattsyn.dev.ApartmentsUnderConstruction.entities.Apartment;
 import kattsyn.dev.ApartmentsUnderConstruction.service.ApartmentService;
 import kattsyn.dev.ApartmentsUnderConstruction.service.FloorService;
 import kattsyn.dev.ApartmentsUnderConstruction.service.HouseService;
+import kattsyn.dev.ApartmentsUnderConstruction.service.RegionService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -27,6 +28,7 @@ public class ApartmentController {
     private final ApartmentService apartmentService;
     private final HouseService houseService;
     private final FloorService floorService;
+    private final RegionService regionService;
 
     @GetMapping("/info")
     public String showInfoPage(Model model, @RequestParam Long id) {
@@ -54,6 +56,7 @@ public class ApartmentController {
         model.addAttribute("distinctApartmentsByAmountOfRooms", apartmentService.findDistinctAmountOfRooms());
         model.addAttribute("housesNames", houseService.getDistinctHousesNames());
         model.addAttribute("floorNumbers", floorService.getDistinctFloorNumbers());
+        model.addAttribute("regionsNames", regionService.getDistinctRegionsNames());
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("totalPages", apartmentsPage.getTotalPages());
 

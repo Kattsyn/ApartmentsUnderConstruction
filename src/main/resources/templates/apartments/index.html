@@ -50,25 +50,20 @@
             <div class="col"></div>
             <div class="col">
                 <p class="text-secondary fs-6">Выберите регион</p>
-                <!--
-                <select class="form-select" aria-label="Пример выбора по умолчанию" style="padding: 10px"
-                        th:field="${filter.region}">
-                    <option selected
-
-                            th:value="${apartment.status.saleStatusId}"
-                            th:text="${apartment.status.name}"
-
-                    >Все регионы
-                    </option>
-                    <option
-
-                            th:each="saleStatus : ${saleStatuses}"
-                            th:value="${saleStatus.saleStatusId}"
-                            th:text="${saleStatus.name}" value="0">Один
-
-                    </option>
-                </select>
-                -->
+                <label for="regionName">
+                    <select id="regionName" class="form-select"  aria-label="Пример выбора по умолчанию"
+                            th:field="*{regionName}">
+                        <option selected
+                                value=""
+                        >Все
+                        </option>
+                        <option
+                                th:each="regName : ${regionsNames}"
+                                th:value="${regName}"
+                                th:text="${regName}" value="0">Воронежская область
+                        </option>
+                    </select>
+                </label>
             </div>
             <div class="col">
                 <p class="text-secondary fs-6">Выберите объект</p>

@@ -6,16 +6,22 @@ VALUES (1, 'ON SALE'),
 
 SELECT setval('public.sale_statuses_sale_status_id_seq', (SELECT MAX(sale_status_id) FROM sale_statuses));
 
+--Регионы
+
+INSERT INTO regions (region_id, name) values (1, 'Воронежская область');
+
+SELECT setval('public.regions_region_id_seq', (SELECT MAX(regions.region_id) FROM regions));
+
 --Дома
 
 INSERT INTO houses
-VALUES (1, 'г. Воронеж, ул. Моисеева, 23', 'Афродита', '2024-08-14', '2024-11-09', '2025-02-02');
+VALUES (1, 1, 'г. Воронеж, ул. Моисеева, 23', 'Афродита', '2024-08-14', '2024-11-09', '2025-02-02');
 INSERT INTO houses
-VALUES (2, 'г. Воронеж, ул. Новосибирская, 66', 'Зевс', '2024-03-28', '2024-11-12', '2025-06-21');
+VALUES (2, 1, 'г. Воронеж, ул. Новосибирская, 66', 'Зевс', '2024-03-28', '2024-11-12', '2025-06-21');
 INSERT INTO houses
-VALUES (3, 'г. Воронеж, ул. Богдана Хмельницкого, 91', 'Орел', '2024-09-21', '2024-11-09', '2024-12-26');
+VALUES (3, 1, 'г. Воронеж, ул. Богдана Хмельницкого, 91', 'Орел', '2024-09-21', '2024-11-09', '2024-12-26');
 INSERT INTO houses
-VALUES (4, 'г. Воронеж, ул. 20-Летия октября, 12', 'Феникс', '2024-05-13', '2024-11-11', '2025-05-06');
+VALUES (4, 1, 'г. Воронеж, ул. 20-Летия октября, 12', 'Феникс', '2024-05-13', '2024-11-11', '2025-05-06');
 
 SELECT setval('public.houses_house_id_seq', (SELECT MAX(house_id) FROM houses));
 
