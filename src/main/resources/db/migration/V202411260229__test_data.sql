@@ -8,7 +8,8 @@ SELECT setval('public.sale_statuses_sale_status_id_seq', (SELECT MAX(sale_status
 
 --Регионы
 
-INSERT INTO regions (region_id, name) values (1, 'Воронежская область');
+INSERT INTO regions (region_id, name)
+values (1, 'Воронежская область');
 
 SELECT setval('public.regions_region_id_seq', (SELECT MAX(regions.region_id) FROM regions));
 
@@ -26,13 +27,16 @@ VALUES (4, 1, 'г. Воронеж, ул. 20-Летия октября, 12', 'Ф�
 SELECT setval('public.houses_house_id_seq', (SELECT MAX(house_id) FROM houses));
 
 --Этажи
-
 INSERT INTO floors (floor_id, house_id, floor_number, floor_plan)
-VALUES (2, 1, 5,'https://rzv.ru/upload/resized_cache_custom/xml_00165_000000674_000007073_Plan1_b3f37fa671ca11ef867fb3409566c4e4_726x10000.jpg');
+VALUES (1, 4, 9,
+        'https://rzv.ru/upload/resized_cache_custom/xml_00111_000000394_000005808_Plan1_95ac53cea7eb11ef8682b271e4872331_726x10000.jpg');
+INSERT INTO floors (floor_id, house_id, floor_number, floor_plan)
+VALUES (2, 1, 5,
+        'https://rzv.ru/upload/resized_cache_custom/xml_00165_000000674_000007073_Plan1_b3f37fa671ca11ef867fb3409566c4e4_726x10000.jpg');
 INSERT INTO floors (floor_id, house_id, floor_number, floor_plan)
 VALUES (3, 2, 3, 'https://rzv.ru/upload/resized_cache_custom/xml_00132_000000444_3_etazh____OBShch_1920x1920.jpg');
 INSERT INTO floors (floor_id, house_id, floor_number, floor_plan)
-VALUES (4, 3, 18, 'https://rzv.ru/upload/resized_cache_custom/xml_00007_000000073_000000159_Plan_726x10000.jpg');
+VALUES (4, 3, 18, 'https://rzv.ru/upload/resized_cache_custom/xml_00136_000000479_000005010_Plan1_726x10000.jpg');
 
 SELECT setval('public.floors_floor_id_seq', (SELECT MAX(floor_id) FROM floors));
 
@@ -65,6 +69,10 @@ INSERT INTO apartments (apartment_id, floor_id, sale_status_id, apartment_number
                         amount_of_rooms, entrance_number, apartment_cost, apartment_plan)
 VALUES (7, 4, 1, 85, 54.98, 53.43, 1, 5, 5398966,
         'https://rzv.ru/upload/resized_cache_custom/xml_00124_000000681_000007469_Plan_8e237d6987ba11ef867fb3409566c4e4_726x10000.jpg');
+INSERT INTO apartments (apartment_id, floor_id, sale_status_id, apartment_number, total_area, living_area,
+                        amount_of_rooms, entrance_number, apartment_cost, apartment_plan)
+VALUES (8, 1, 1, 67, 62.28, 60.73, 2, 1, 7859736,
+        'https://rzv.ru/upload/resized_cache_custom/xml_00111_000000394_000005808_Plan_3e00ebdaa7e811ef8682b271e4872331_726x10000.jpg');
 
 SELECT setval('public.apartments_apartment_id_seq', (SELECT MAX(apartment_id) FROM apartments));
 
