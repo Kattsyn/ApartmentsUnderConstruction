@@ -14,7 +14,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -34,25 +33,15 @@ public class ApartmentService {
     private final FloorRepository floorRepository;
     private final StatusRepository statusRepository;
 
-    public String findAllByFilter(Model model, ApartmentFilter filter) {
-        //model.addAttribute("apartments", apartmentRepository.findAllByFilter(filter));
-        ApartmentSpecification specification = new ApartmentSpecification(filter);
-        log.info(filter.toString());
-        model.addAttribute("apartments", apartmentRepository.findAll(specification));
-        model.addAttribute("distinctApartmentsByAmountOfRooms", apartmentRepository.findDistinctRooms());
-
-        return "apartments/new-index-test";
-    }
-
     public List<Byte> findDistinctAmountOfRooms() {
         return apartmentRepository.findDistinctRooms();
     }
 
-    public Page<Apartment> getFilteredApartmentPage(ApartmentFilter filter, int pageNumber, int count) {
+    public Page<Apartment> getFilteredApartmentPage(ApartmentFilter filter, int pageNumber, int pageSize) {
         ApartmentSpecification specification = new ApartmentSpecification(filter);
         log.info(filter.toString());
 
-        Pageable page = PageRequest.of(pageNumber, count);
+        Pageable page = PageRequest.of(pageNumber, pageSize);
         return apartmentRepository.findAll(specification, page);
     }
 
@@ -66,31 +55,6 @@ public class ApartmentService {
         return "apartments/info-apartment";
     }
 
-    public String showApartmentsListPage(Model model, int pageNumber, int count) {
-        Page<Apartment> page = apartmentRepository.findAll(PageRequest.of(pageNumber, count, Sort.by("floor.house.name")));
-        model.addAttribute("apartments", page.getContent());
-        model.addAttribute("distinctApartmentsByAmountOfRooms", apartmentRepository.findDistinctRooms());
-
-        return "apartments/new-index-test";
-    }
-
-    public String showApartmentsListByFloorId(Model model, @RequestParam Long floorId) {
-        Optional<Floor> floor = floorRepository.findById(floorId);
-        if (floor.isEmpty()) {
-            log.error("Floor id: {} NOT FOUND in showApartmentsListByFloorId", floorId);
-            return "redirect:/floors";
-        }
-
-        List<Apartment> list = apartmentRepository.findByFloor(floor.get());
-        model.addAttribute("apartments", list);
-        return "apartments/index";
-    }
-
-    public String showApartmentsList(Model model) {
-        List<Apartment> apartments = apartmentRepository.findAll(Sort.by("floor.house.name"));
-        model.addAttribute("apartments", apartments);
-        return "apartments/index";
-    }
 
     public String showCreatePage(Model model) {
 

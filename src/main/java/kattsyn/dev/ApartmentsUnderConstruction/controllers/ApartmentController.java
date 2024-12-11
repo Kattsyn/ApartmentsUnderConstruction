@@ -9,7 +9,7 @@ import kattsyn.dev.ApartmentsUnderConstruction.service.HouseService;
 import kattsyn.dev.ApartmentsUnderConstruction.service.RegionService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -35,21 +35,17 @@ public class ApartmentController {
         return apartmentService.showInfoPage(model, id);
     }
 
-    @GetMapping("/byFloorId")
-    public String showApartmentsListByFloorId(Model model, @RequestParam Long floorId) {
-        return apartmentService.showApartmentsListByFloorId(model, floorId);
-    }
 
     @GetMapping({"/", ""})
     public String getApartmentsPageWithPaginationAndFiltering(
             Model model,
             ApartmentFilter filter,
             @RequestParam(defaultValue = "0") int currentPage,
-            @RequestParam(defaultValue = "5") int count
+            @RequestParam(defaultValue = "6") int pageSize
     ) {
 
 
-        Page<Apartment> apartmentsPage = apartmentService.getFilteredApartmentPage(filter, currentPage, count);
+        Page<Apartment> apartmentsPage = apartmentService.getFilteredApartmentPage(filter, currentPage, pageSize);
 
         model.addAttribute("filter", filter);
         model.addAttribute("apartments", apartmentsPage.getContent());
@@ -69,25 +65,25 @@ public class ApartmentController {
     }
 
 
-    @PreAuthorize("hasRole('ROLE_MANAGER')")
+    @Secured("ROLE_MANAGER")
     @GetMapping("/create")
     public String showCreatePage(Model model) {
         return apartmentService.showCreatePage(model);
     }
 
-    @PreAuthorize("hasRole('ROLE_MANAGER')")
+    @Secured("ROLE_MANAGER")
     @PostMapping("/create")
     public String createApartment(@Valid @ModelAttribute("apartmentDTO") ApartmentDTO apartmentDTO, BindingResult bindingResult) {
         return apartmentService.createApartment(apartmentDTO, bindingResult);
     }
 
-    @PreAuthorize("hasRole('ROLE_MANAGER')")
+    @Secured("ROLE_MANAGER")
     @GetMapping("/edit")
     public String showEditPage(Model model, @RequestParam Long id) {
         return apartmentService.showEditPage(model, id);
     }
 
-    @PreAuthorize("hasRole('ROLE_MANAGER')")
+    @Secured("ROLE_MANAGER")
     @PostMapping("/edit")
     public String editApartment(Model model,
                                 @RequestParam Long id,
@@ -96,6 +92,7 @@ public class ApartmentController {
         return apartmentService.editApartment(model, id, apartmentDTO, bindingResult);
     }
 
+    @Secured("ROLE_MANAGER")
     @GetMapping("/delete")
     public String deleteApartmentById(@RequestParam Long id) {
         return apartmentService.deleteApartmentById(id);

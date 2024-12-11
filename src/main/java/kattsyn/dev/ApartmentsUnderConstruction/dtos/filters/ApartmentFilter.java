@@ -10,6 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ApartmentFilter {
+    private Long floorId;
     private String regionName;
     private String houseName;
     private byte amountOfRooms;
@@ -22,7 +23,8 @@ public class ApartmentFilter {
     @Override
     public String toString() {
         return "ApartmentFilter{" +
-                "region='" + regionName + '\'' +
+                "floorId=" + floorId +
+                ", regionName='" + regionName + '\'' +
                 ", houseName='" + houseName + '\'' +
                 ", amountOfRooms=" + amountOfRooms +
                 ", floorNumber=" + floorNumber +
