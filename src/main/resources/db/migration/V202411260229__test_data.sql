@@ -89,9 +89,9 @@ SELECT setval('public.roles_role_id_seq', (SELECT MAX(role_id) from roles));
 
 --Пользователи
 
-INSERT INTO users (user_id, username, password, name, surname, phone_number, email)
+INSERT INTO users (user_id, username, password, name, surname, phone_number, email, status)
 VALUES (1, 'admin', '$2a$10$A9R5tDQq3SFDKJa.J0OYj.PlLlFqbf/mfzyrcwMjMi0w22mZE5N3i', 'admin', 'admin', '+8999',
-        'mail@mail.ru');
+        'mail@mail.ru', true);
 
 SELECT setval('public.users_user_id_seq', (SELECT MAX(user_id) from users));
 
