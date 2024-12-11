@@ -5,6 +5,10 @@ import kattsyn.dev.ApartmentsUnderConstruction.entities.Floor;
 import kattsyn.dev.ApartmentsUnderConstruction.mappers.FloorMapper;
 import kattsyn.dev.ApartmentsUnderConstruction.service.FloorService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,8 +28,9 @@ public class FloorController {
     public String showFloorsList(
             Model model,
             @RequestParam (defaultValue = "0") int pageNumber,
-            @RequestParam (defaultValue = "10") int count) {
-        return floorService.showFloorsList(model, pageNumber, count);
+            @RequestParam (defaultValue = "10") int pageSize) {
+        model.addAttribute("floors", floorService.getFloorPage(pageNumber, pageSize).getContent());
+        return "floors/index";
     }
 
     @GetMapping("/getFloorPlan")
@@ -34,12 +39,14 @@ public class FloorController {
         return "images/index";
     }
 
+    @Secured("ROLE_MANAGER")
     @GetMapping("/create")
     public String showCreatePage(Model model) {
         model.addAttribute("floorDTO", new FloorDTO());
         return "floors/create-floor";
     }
 
+    @Secured("ROLE_MANAGER")
     @PostMapping("/create")
     public String createHouse(@Valid @ModelAttribute("floorDTO") FloorDTO floorDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -53,6 +60,7 @@ public class FloorController {
         return "redirect:/floors";
     }
 
+    @Secured("ROLE_MANAGER")
     @GetMapping("/edit")
     public String showEditPage(Model model, @RequestParam Long id) {
         Floor floor = floorService.findById(id);
@@ -63,6 +71,7 @@ public class FloorController {
         return "floors/edit-floor";
     }
 
+    @Secured("ROLE_MANAGER")
     @PostMapping("/edit")
     public String editFloor(Model model,
                             @RequestParam Long id,
@@ -80,6 +89,7 @@ public class FloorController {
         return "redirect:/floors";
     }
 
+    @Secured("ROLE_MANAGER")
     @GetMapping("/delete")
     public String deleteFloorById(@RequestParam Long id) {
         floorService.deleteFloorById(id);

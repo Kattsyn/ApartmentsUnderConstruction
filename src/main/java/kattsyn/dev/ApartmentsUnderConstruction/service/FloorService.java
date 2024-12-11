@@ -49,10 +49,8 @@ public class FloorService {
     }
 
     @Transactional
-    public String showFloorsList(Model model, int pageNumber, int count) {
-        Page<Floor> floors = floorRepository.findAll(PageRequest.of(pageNumber, count, Sort.by("floorId")));
-        model.addAttribute("floors", floors.getContent());
-        return "floors/index";
+    public Page<Floor> getFloorPage(int pageNumber, int pageSize) {
+        return floorRepository.findAll(PageRequest.of(pageNumber, pageSize, Sort.by("floorId")));
     }
 
     @Transactional
