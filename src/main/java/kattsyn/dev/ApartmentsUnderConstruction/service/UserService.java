@@ -2,8 +2,11 @@ package kattsyn.dev.ApartmentsUnderConstruction.service;
 
 import kattsyn.dev.ApartmentsUnderConstruction.dtos.RegistrationDTO;
 import kattsyn.dev.ApartmentsUnderConstruction.entities.User;
+import kattsyn.dev.ApartmentsUnderConstruction.mappers.UserMapper;
 import kattsyn.dev.ApartmentsUnderConstruction.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -22,20 +25,18 @@ public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final RoleService roleService;
     private final PasswordEncoder passwordEncoder;
+    private final UserMapper userMapper;
 
 
 
-    public User createUser(RegistrationDTO registrationDTO) {
-        User user = new User(
-                registrationDTO.getUsername(),
-                passwordEncoder.encode(registrationDTO.getPassword()),
-                registrationDTO.getName(),
-                registrationDTO.getSurname(),
-                registrationDTO.getPhoneNumber(),
-                registrationDTO.getEmail()
-        );
+    public Page<User> getUsersPage(int currentPage, int pageSize) {
+        return userRepository.findAll(PageRequest.of(currentPage, pageSize));
+    }
+
+    public void createUser(RegistrationDTO registrationDTO) {
+        User user = userMapper.fromRegistrationDTO(registrationDTO, passwordEncoder);
         user.setRoles(List.of(roleService.getUserRole()));
-        return userRepository.save(user);
+        userRepository.save(user);
     }
 
     public User findByUsername(String username) {

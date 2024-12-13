@@ -3,13 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apartments</title>
+    <title>Houses</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Parkinsans:wght@300..800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Parkinsans:wght@300..800&family=Roboto:ital,
     wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css"> <!-- Подключение стилей -->
 </head>
+
+<style>
+    #getHousesButton {
+        padding: 10px;
+        background-color: #007bff;
+        color: #f5f6fa;
+        width: 200px;
+    }
+    #clearFilters {
+        padding: 10px;
+    }
+</style>
+
 <body>
 <div class="container">
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
@@ -42,19 +55,68 @@
     <h1 class="text-center p-4">Выбор дома</h1>
 
     <div class="container my-5">
+        <form th:action="@{/houses/}" method="get" enctype="multipart/form-data" th:object="${filter}"
+              style="padding-top: 5%">
+            <div class="row">
+                <div class="col">
+                    <p class="text-secondary fs-6">Выберите регион</p>
+                    <label for="regionName">
+                        <select id="regionName" class="form-select" aria-label="Пример выбора по умолчанию"
+                                th:field="*{regionId}">
+                            <option selected
+                                    value=""
+                            >Все
+                            </option>
+                            <option
+                                    th:each="region : ${regions}"
+                                    th:value="${region.getRegionId()}"
+                                    th:text="${region.getName()}" value="0">Воронежская область
+                            </option>
+                        </select>
+                    </label>
+                </div>
+                <div class="col">
+                    <p class="text-secondary fs-6">&nbsp;</p>
+                    <label for="isReady">
+                        <select id="isReady" class="form-select" aria-label="Пример выбора по умолчанию"
+                                th:field="*{isReady}">
+                            <option selected value="">Все</option>
+                            <option
+                                     value="true">Готовые с ключами
+                            </option>
+                            <option
+                                    value="false">Строящиеся
+                            </option>
+                        </select>
+                    </label>
+                </div>
+
+                <div class="col"></div>
+                <div class="col"></div>
+            </div>
+            <div class="row mt-3 d-flex justify-content-end">
+                <div class="col-auto">
+                    <a href="/houses/" id="clearFilters" class="btn">Очистить фильтры &#x2715;</a>
+                </div>
+                <div class="col-auto">
+                    <button id="getHousesButton" type="submit" class="btn">Показать Дома</button>
+                </div>
+            </div>
+        </form>
 
         <div class="row justify-content-center">
             <div class="col-12">
 
                 <div class="row mb-3">
                     <div class="col align-self-start">
-                        <a sec:authorize="hasRole('ROLE_MANAGER')" th:href="@{/houses/create}" class="btn btn-primary mg-4">Add house</a>
+                        <a sec:authorize="hasRole('ROLE_MANAGER')" th:href="@{/houses/create}"
+                           class="btn btn-primary mg-4">Add house</a>
                     </div>
                 </div>
 
                 <div class="row row-cols-1 row-cols-md-3 g-4">
                     <div class="col" th:each="house : ${houses}">
-                        <a th:href="@{/floors/byHouseId(id=${house.houseId})}"
+                        <a th:href="@{/apartments/(houseName=${house.name})}"
                            style="display: block; text-decoration: none; color: inherit;">
                             <div style="background-color: #f5f6fa" class="card">
                                 <!-- Карусель -->
@@ -68,7 +130,8 @@
                                     <!-- Изображения -->
                                     <div class="carousel-images"
                                          th:style="'width: ' + (100 * ${house.images.size()}) + '%;'">
-                                        <img th:each="image : ${house.images}" th:src="${image.url}" alt="Carousel Image">
+                                        <img th:each="image : ${house.images}" th:src="${image.url}"
+                                             alt="Carousel Image">
                                     </div>
                                 </div>
 
@@ -78,14 +141,18 @@
                                             <h4 class="card-title" th:text="${house.name}">Ахилес</h4>
                                         </div>
                                         <div class="col">
-                                            <h4 class="card-title text-end">от 4.2 млн</h4>
+                                            <h4 class="card-title text-end" th:text="${house.minApartmentPrice != null ? 'от ' + #numbers.formatDecimal(house.minApartmentPrice / 1000000.0, 1, 1,  'POINT') + ' млн ₽' : 'Цены не доступны'}">от 4.2 млн</h4>
                                         </div>
                                     </div>
                                     <div>
-                                        <p th:text="${house.address}" class="badge mt-2" style="background-color: #008c9c">г. Воронеж, ул. Моисеева, 23</p>
+                                        <p th:text="${house.address}" class="badge mt-2"
+                                           style="background-color: #008c9c">г. Воронеж, ул. Моисеева, 23</p>
                                     </div>
-                                    <a sec:authorize="hasRole('ROLE_MANAGER')" th:href="@{/houses/edit(id=${house.houseId})}" class="btn btn-primary">Edit</a>
-                                    <a sec:authorize="hasRole('ROLE_MANAGER')" th:href="@{/houses/delete(id=${house.houseId})}" class="btn btn-danger">Delete</a>
+                                    <a sec:authorize="hasRole('ROLE_MANAGER')"
+                                       th:href="@{/houses/edit(id=${house.houseId})}" class="btn btn-primary">Edit</a>
+                                    <a sec:authorize="hasRole('ROLE_MANAGER')"
+                                       th:href="@{/houses/delete(id=${house.houseId})}"
+                                       class="btn btn-danger">Delete</a>
                                 </div>
                             </div>
                         </a>
@@ -93,6 +160,38 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="d-flex justify-content-center">
+
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li class="page-item" th:classappend="${currentPage == 0 ? 'disabled' : ''}">
+                    <a class="page-link" th:href="@{/houses/?currentPage=0}" aria-label="First">
+                        <span aria-hidden="true">&laquo;&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item" th:classappend="${currentPage == 0 ? 'disabled' : ''}">
+                    <a class="page-link" th:href="@{/houses/?currentPage={currentPage}(currentPage=${currentPage - 1})}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item" th:each="pageNum : ${pageNumbers}">
+                    <a class="page-link" th:href="@{/houses/?currentPage={pageNum}(pageNum=${pageNum})}"
+                       th:text="${pageNum + 1}" aria-label="Page ${pageNum + 1}"></a>
+                </li>
+                <li class="page-item" th:classappend="${currentPage == totalPages - 1 ? 'disabled' : ''}">
+                    <a class="page-link" th:href="@{/houses/?currentPage={currentPage}(currentPage=${currentPage + 1})}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                <li class="page-item" th:classappend="${currentPage == totalPages - 1 ? 'disabled' : ''}">
+                    <a class="page-link" th:href="@{/houses/?currentPage={currentPage}(currentPage=${totalPages - 1})}" aria-label="Last">
+                        <span aria-hidden="true">&raquo;&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </div>
 
     <hr>

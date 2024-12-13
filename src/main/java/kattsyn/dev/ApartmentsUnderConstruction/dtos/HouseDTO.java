@@ -13,12 +13,14 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class HouseDTO {
 
+    private Integer regionId;
     private String address;
     private String name;
     private LocalDate buildingStartDate;
     private LocalDate plannedBuildingEndDate;
     private LocalDate commissioningDate;
     private String housePlan;
+    private Boolean isReady;
 
     /*
     public void setPlannedBuildingEndDate(LocalDate plannedBuildingEndDate) {

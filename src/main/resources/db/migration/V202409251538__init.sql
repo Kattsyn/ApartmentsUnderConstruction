@@ -13,7 +13,8 @@ CREATE TABLE houses
     building_start_date       DATE,
     planned_building_end_date DATE,
     commissioning_date        DATE,
-    foreign key (region_id) references  regions (region_id)
+    is_ready                  BOOLEAN       NOT NULL,
+    foreign key (region_id) references regions (region_id)
 );
 
 CREATE TABLE images
@@ -93,7 +94,8 @@ CREATE TABLE users
     name         VARCHAR(50)           NOT NULL,
     surname      VARCHAR(50)           NOT NULL,
     phone_number VARCHAR(20)           NOT NULL,
-    email        VARCHAR(80)
+    email        VARCHAR(80),
+    status       BOOLEAN
 );
 
 CREATE TABLE users_roles

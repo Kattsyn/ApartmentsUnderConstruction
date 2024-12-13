@@ -16,17 +16,9 @@ public class ApartmentSpecification implements Specification<Apartment> {
 
     @Override
     public Predicate toPredicate(Root<Apartment> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-        // Список условий фильтрации
+
         Predicate predicate = criteriaBuilder.conjunction(); // Это всегда True, чтобы добавить другие условия
 
-        /*
-        // Фильтрация по региону (House -> Apartment)
-        if (filter.getRegion() != null && !filter.getRegion().isEmpty()) {
-            Join<Apartment, House> houseJoin = root.join("house", JoinType.INNER);
-            predicate = criteriaBuilder.and(predicate, criteriaBuilder.equal(houseJoin.get("region"), filter.getRegion()));
-        }
-
-         */
         Join<Apartment, Floor> floorJoin = root.join("floor", JoinType.INNER);
         Join<Floor, House> houseJoin = floorJoin.join("house", JoinType.INNER);
         Join<House, Region> regionJoin = houseJoin.join("region", JoinType.INNER);
@@ -34,6 +26,11 @@ public class ApartmentSpecification implements Specification<Apartment> {
         // Фильтрация по количеству комнат
         if (filter.getAmountOfRooms() != 0) {
             predicate = criteriaBuilder.and(predicate, criteriaBuilder.equal(root.get("amountOfRooms"), filter.getAmountOfRooms()));
+        }
+
+        //Фильтрация по ID этажа
+        if (filter.getFloorId() != null && filter.getFloorId() != 0) {
+            predicate = criteriaBuilder.and(predicate, criteriaBuilder.equal(floorJoin.get("floorId"), filter.getFloorId()));
         }
 
         // Фильтрация по минимальной стоимости
@@ -62,8 +59,8 @@ public class ApartmentSpecification implements Specification<Apartment> {
         }
 
         // Фильтрация по имени региона
-        if (filter.getRegionName() != null && !filter.getRegionName().isEmpty()) {
-            predicate = criteriaBuilder.and(predicate, criteriaBuilder.like(regionJoin.get("name"), filter.getRegionName()));
+        if (filter.getRegionId() != null && filter.getRegionId() != 0) {
+            predicate = criteriaBuilder.and(predicate, criteriaBuilder.equal(regionJoin.get("regionId"), filter.getRegionId()));
         }
 
 

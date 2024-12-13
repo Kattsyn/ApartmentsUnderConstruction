@@ -16,13 +16,13 @@ SELECT setval('public.regions_region_id_seq', (SELECT MAX(regions.region_id) FRO
 --Дома
 
 INSERT INTO houses
-VALUES (1, 1, 'г. Воронеж, ул. Моисеева, 23', 'Афродита', '2024-08-14', '2024-11-09', '2025-02-02');
+VALUES (1, 1, 'ул. Моисеева, 23', 'Афродита', '2024-08-14', '2024-11-09', '2025-02-02', false);
 INSERT INTO houses
-VALUES (2, 1, 'г. Воронеж, ул. Новосибирская, 66', 'Зевс', '2024-03-28', '2024-11-12', '2025-06-21');
+VALUES (2, 1, 'ул. Новосибирская, 66', 'Зевс', '2024-03-28', '2024-11-12', '2025-06-21', false);
 INSERT INTO houses
-VALUES (3, 1, 'г. Воронеж, ул. Богдана Хмельницкого, 91', 'Орел', '2024-09-21', '2024-11-09', '2024-12-26');
+VALUES (3, 1, 'ул. Богдана Хмельницкого, 91', 'Орел', '2024-09-21', '2024-11-09', '2024-12-26', true);
 INSERT INTO houses
-VALUES (4, 1, 'г. Воронеж, ул. 20-Летия октября, 12', 'Феникс', '2024-05-13', '2024-11-11', '2025-05-06');
+VALUES (4, 1, 'ул. 20-Летия октября, 12', 'Феникс', '2024-05-13', '2024-11-11', '2025-05-06', true);
 
 SELECT setval('public.houses_house_id_seq', (SELECT MAX(house_id) FROM houses));
 
@@ -89,9 +89,9 @@ SELECT setval('public.roles_role_id_seq', (SELECT MAX(role_id) from roles));
 
 --Пользователи
 
-INSERT INTO users (user_id, username, password, name, surname, phone_number, email)
+INSERT INTO users (user_id, username, password, name, surname, phone_number, email, status)
 VALUES (1, 'admin', '$2a$10$A9R5tDQq3SFDKJa.J0OYj.PlLlFqbf/mfzyrcwMjMi0w22mZE5N3i', 'admin', 'admin', '+8999',
-        'mail@mail.ru');
+        'mail@mail.ru', true);
 
 SELECT setval('public.users_user_id_seq', (SELECT MAX(user_id) from users));
 

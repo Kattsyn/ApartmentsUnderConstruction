@@ -1,20 +1,19 @@
 package kattsyn.dev.ApartmentsUnderConstruction.service;
 
 import kattsyn.dev.ApartmentsUnderConstruction.dtos.HouseDTO;
+import kattsyn.dev.ApartmentsUnderConstruction.dtos.filters.HouseFilter;
 import kattsyn.dev.ApartmentsUnderConstruction.entities.House;
+import kattsyn.dev.ApartmentsUnderConstruction.entities.Image;
+import kattsyn.dev.ApartmentsUnderConstruction.mappers.HouseMapper;
 import kattsyn.dev.ApartmentsUnderConstruction.repositories.HouseRepository;
+import kattsyn.dev.ApartmentsUnderConstruction.specifications.HouseSpecification;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -22,97 +21,43 @@ import java.util.Optional;
 public class HouseService {
 
     private final HouseRepository houseRepository;
+    private final ImageService imageService;
+    private final HouseMapper houseMapper;
 
-
-    public String showCreatePage(Model model) {
-        HouseDTO houseDTO = new HouseDTO();
-        model.addAttribute("houseDTO", houseDTO);
-        return "houses/create-house";
+    public Integer getMinApartmentPriceByHouseId(Long id) {
+        return houseRepository.getMinApartmentPriceByHouseId(id);
     }
 
-    public String showHouseList(Model model, int pageNumber, int count) {
-        Page<House> houses = houseRepository.findAll(PageRequest.of(pageNumber, count, Sort.by("name")));
-        model.addAttribute("houses", houses.getContent());
-        return "houses/index";
+    public Page<House> getFilteredHousePage(HouseFilter filter, int pageNumber, int pageSize) {
+        return houseRepository.findAll(
+                new HouseSpecification(filter),
+                PageRequest.of(pageNumber, pageSize)
+        );
+    }
+
+    public void saveWithImages(HouseDTO houseDTO, List<String> images) {
+        List<Image> savedImages = imageService.saveAllByUrls(images);
+
+        House house = houseMapper.fromHouseDTO(houseDTO);
+        house.setImages(savedImages);
+        save(house);
+    }
+
+    public House findById(Long id) {
+        return houseRepository.findById(id).orElseThrow(() ->
+                new IllegalArgumentException(String.format("House id: %s NOT FOUND", id)));
     }
 
     public List<String> getDistinctHousesNames() {
         return houseRepository.getDistinctNames();
     }
 
-    public String showEditPage(Model model, @RequestParam Long id) {
-        Optional<House> house = houseRepository.findById(id);
-        if (house.isEmpty()) {
-            log.error("House id: {} not found", id);
-            return "redirect:/houses";
-        }
-        model.addAttribute("house", house.get());
 
-        HouseDTO houseDTO = new HouseDTO();
-        houseDTO.setName(house.get().getName());
-        houseDTO.setAddress(house.get().getAddress());
-        houseDTO.setBuildingStartDate(house.get().getBuildingStartDate());
-        houseDTO.setPlannedBuildingEndDate(house.get().getPlannedBuildingEndDate());
-        houseDTO.setCommissioningDate(house.get().getCommissioningDate());
-
-        model.addAttribute("houseDTO", houseDTO);
-
-        return "houses/edit-house";
+    public void deleteHouseById(Long id) {
+        houseRepository.delete(findById(id));
     }
 
-    public String editHouse(Model model,
-                            Long id,
-                            HouseDTO houseDTO,
-                            BindingResult bindingResult) {
-        Optional<House> house = houseRepository.findById(id);
-        if (house.isEmpty()) {
-            log.error("House id: {} not found in editHouse method.", id);
-            return "redirect:/houses";
-        }
-        model.addAttribute("house", house.get());
-        if (bindingResult.hasErrors()) {
-            return "houses/edit-house";
-        }
-        house.get().setAddress(houseDTO.getAddress());
-        house.get().setName(houseDTO.getName());
-        house.get().setBuildingStartDate(houseDTO.getBuildingStartDate());
-        house.get().setPlannedBuildingEndDate(houseDTO.getPlannedBuildingEndDate());
-        house.get().setCommissioningDate(houseDTO.getCommissioningDate());
-
-        houseRepository.save(house.get());
-
-        return "redirect:/houses";
-    }
-
-
-    public String createHouse(HouseDTO houseDTO, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "houses/create-house";
-        }
-        save(houseDTO);
-        return "redirect:/houses";
-    }
-
-    public String deleteHouseById(Long id) {
-        Optional<House> house = houseRepository.findById(id);
-
-        if (house.isPresent()) {
-            houseRepository.delete(house.get());
-        } else {
-            log.error("House id: {} in method deleteHouseById() NOT FOUND", id);
-        }
-
-        return "redirect:/houses";
-    }
-
-    public House save(HouseDTO houseDTO) {
-        House house = new House(
-                houseDTO.getAddress(),
-                houseDTO.getName(),
-                houseDTO.getBuildingStartDate(),
-                houseDTO.getPlannedBuildingEndDate(),
-                houseDTO.getCommissioningDate());
-
-        return houseRepository.save(house);
+    public void save(House house) {
+        houseRepository.save(house);
     }
 }

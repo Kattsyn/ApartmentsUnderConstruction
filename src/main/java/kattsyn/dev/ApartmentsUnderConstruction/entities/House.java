@@ -17,7 +17,6 @@ import java.util.List;
 @Table(name = "houses")
 public class House {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "house_id")
@@ -32,14 +31,11 @@ public class House {
     private LocalDate plannedBuildingEndDate;
     @Column(name = "commissioning_date")
     private LocalDate commissioningDate;
+    @Column(name = "is_ready")
+    private Boolean isReady;
 
-    public House(String address, String name, LocalDate buildingStartDate, LocalDate plannedBuildingEndDate, LocalDate commissioningDate) {
-        this.address = address;
-        this.name = name;
-        this.buildingStartDate = buildingStartDate;
-        this.plannedBuildingEndDate = plannedBuildingEndDate;
-        this.commissioningDate = commissioningDate;
-    }
+    @Transient
+    private Integer minApartmentPrice;
 
     @ManyToMany
     @JoinTable(
