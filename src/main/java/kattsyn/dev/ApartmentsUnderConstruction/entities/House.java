@@ -34,14 +34,8 @@ public class House {
     @Column(name = "is_ready")
     private Boolean isReady;
 
-    public House(Region region, String address, String name, LocalDate buildingStartDate, LocalDate plannedBuildingEndDate, LocalDate commissioningDate) {
-        this.region = region;
-        this.address = address;
-        this.name = name;
-        this.buildingStartDate = buildingStartDate;
-        this.plannedBuildingEndDate = plannedBuildingEndDate;
-        this.commissioningDate = commissioningDate;
-    }
+    @Transient
+    private Integer minApartmentPrice;
 
     @ManyToMany
     @JoinTable(
