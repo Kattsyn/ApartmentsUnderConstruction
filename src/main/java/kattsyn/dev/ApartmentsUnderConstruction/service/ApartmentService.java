@@ -13,7 +13,6 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,11 +37,9 @@ public class ApartmentService {
     }
 
     public Page<Apartment> getFilteredApartmentPage(ApartmentFilter filter, int pageNumber, int pageSize) {
-        ApartmentSpecification specification = new ApartmentSpecification(filter);
-        log.info(filter.toString());
-
-        Pageable page = PageRequest.of(pageNumber, pageSize);
-        return apartmentRepository.findAll(specification, page);
+        return apartmentRepository.findAll(
+                new ApartmentSpecification(filter),
+                PageRequest.of(pageNumber, pageSize));
     }
 
     public String showInfoPage(Model model, Long id) {

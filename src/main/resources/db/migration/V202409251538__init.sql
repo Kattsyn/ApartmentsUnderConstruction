@@ -13,6 +13,7 @@ CREATE TABLE houses
     building_start_date       DATE,
     planned_building_end_date DATE,
     commissioning_date        DATE,
+    is_ready                  BOOLEAN       NOT NULL,
     foreign key (region_id) references regions (region_id)
 );
 

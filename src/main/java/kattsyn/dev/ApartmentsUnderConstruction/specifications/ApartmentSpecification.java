@@ -59,8 +59,8 @@ public class ApartmentSpecification implements Specification<Apartment> {
         }
 
         // Фильтрация по имени региона
-        if (filter.getRegionName() != null && !filter.getRegionName().isEmpty()) {
-            predicate = criteriaBuilder.and(predicate, criteriaBuilder.like(regionJoin.get("name"), filter.getRegionName()));
+        if (filter.getRegionId() != null && filter.getRegionId() != 0) {
+            predicate = criteriaBuilder.and(predicate, criteriaBuilder.equal(regionJoin.get("regionId"), filter.getRegionId()));
         }
 
 

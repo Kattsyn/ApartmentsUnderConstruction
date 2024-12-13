@@ -14,14 +14,19 @@
         <div class="col-md-8 mx-auto rounded border p-4 m-4">
             <h2 class="text-center mb-5">New House</h2>
 
-            <form method="post" enctype="multipart/form-data" th:object="${houseDTO}">
+            <form method="post" th:action="@{/houses/create}" enctype="multipart/form-data" th:object="${houseDTO}">
 
                 <div class="row mb-3">
-                    <label class="col-sm-4 col-form-label">Address</label>
+                    <label class="col-sm-4 col-form-label">Region ID</label>
                     <div class="col-sm-8">
-                        <input class="form-control" th:field="${houseDTO.address}" required>
-                        <p th:if="${#fields.hasErrors('address')}" th:errorclass="text-danger"
-                           th:error="${houseDTO.address}"></p>
+                        <select class="form-select" aria-label="Пример выбора по умолчанию"
+                                th:field="${houseDTO.regionId}" required>
+                            <option
+                                    th:each="region : ${regions}"
+                                    th:value="${region.regionId}"
+                                    th:text="${region.name}" value="0">Один
+                            </option>
+                        </select>
                     </div>
                 </div>
 
@@ -31,6 +36,15 @@
                         <input class="form-control" th:field="${houseDTO.name}" required>
                         <p th:if="${#fields.hasErrors('name')}" th:errorclass="text-danger"
                            th:error="${houseDTO.name}"></p>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label">Address</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" th:field="${houseDTO.address}" required>
+                        <p th:if="${#fields.hasErrors('name')}" th:errorclass="text-danger"
+                           th:error="${houseDTO.address}"></p>
                     </div>
                 </div>
 

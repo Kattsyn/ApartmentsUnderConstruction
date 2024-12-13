@@ -51,15 +51,15 @@
                 <p class="text-secondary fs-6">Выберите регион</p>
                 <label for="regionName">
                     <select id="regionName" class="form-select"  aria-label="Пример выбора по умолчанию"
-                            th:field="*{regionName}">
+                            th:field="*{regionId}">
                         <option selected
                                 value=""
                         >Все
                         </option>
                         <option
-                                th:each="regName : ${regionsNames}"
-                                th:value="${regName}"
-                                th:text="${regName}" value="0">Воронежская область
+                                th:each="region : ${regions}"
+                                th:value="${region.getRegionId()}"
+                                th:text="${region.getName()}" value="0">Воронежская область
                         </option>
                     </select>
                 </label>

@@ -52,7 +52,7 @@ public class ApartmentController {
         model.addAttribute("distinctApartmentsByAmountOfRooms", apartmentService.findDistinctAmountOfRooms());
         model.addAttribute("housesNames", houseService.getDistinctHousesNames());
         model.addAttribute("floorNumbers", floorService.getDistinctFloorNumbers());
-        model.addAttribute("regionsNames", regionService.getDistinctRegionsNames());
+        model.addAttribute("regions", regionService.findAll());
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("totalPages", apartmentsPage.getTotalPages());
 

@@ -33,18 +33,10 @@ public class UserService implements UserDetailsService {
         return userRepository.findAll(PageRequest.of(currentPage, pageSize));
     }
 
-    public User createUser(RegistrationDTO registrationDTO) {
-        User user = new User(
-                registrationDTO.getUsername(),
-                passwordEncoder.encode(registrationDTO.getPassword()),
-                registrationDTO.getName(),
-                registrationDTO.getSurname(),
-                registrationDTO.getPhoneNumber(),
-                registrationDTO.getEmail(),
-                true
-        );
+    public void createUser(RegistrationDTO registrationDTO) {
+        User user = userMapper.fromRegistrationDTO(registrationDTO, passwordEncoder);
         user.setRoles(List.of(roleService.getUserRole()));
-        return userRepository.save(user);
+        userRepository.save(user);
     }
 
     public User findByUsername(String username) {
