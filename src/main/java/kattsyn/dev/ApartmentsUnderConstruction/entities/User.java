@@ -44,14 +44,4 @@ public class User {
     )
     List<Role> roles;
 
-    public User(String username, String password, String name, String surname, String phoneNumber, String email, Boolean status) {
-        this.username = username;
-        this.password = password;
-        this.name = name;
-        this.surname = surname;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.status = status;
-    }
-
 }

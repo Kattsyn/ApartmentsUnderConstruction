@@ -1,6 +1,7 @@
 package kattsyn.dev.ApartmentsUnderConstruction.service;
 
 import kattsyn.dev.ApartmentsUnderConstruction.dtos.RegistrationDTO;
+import kattsyn.dev.ApartmentsUnderConstruction.entities.Role;
 import kattsyn.dev.ApartmentsUnderConstruction.entities.User;
 import kattsyn.dev.ApartmentsUnderConstruction.mappers.UserMapper;
 import kattsyn.dev.ApartmentsUnderConstruction.repositories.UserRepository;
@@ -27,6 +28,52 @@ public class UserService implements UserDetailsService {
     private final PasswordEncoder passwordEncoder;
     private final UserMapper userMapper;
 
+
+    public void activateUser(
+            Long userId
+    ) {
+        User user = findById(userId);
+        user.setStatus(true);
+        save(user);
+    }
+
+    public void deactivateUser(
+            Long userId
+    ) {
+        User user = findById(userId);
+        user.setStatus(false);
+        save(user);
+    }
+
+    public void deleteUser(
+            Long userId
+    ) {
+        userRepository.delete(findById(userId));
+    }
+
+    public void addRoleByRoleId(Long userId, Integer roleId) {
+        User user = findById(userId);
+        Role role = roleService.findById(roleId);
+        if (!user.getRoles().contains(role)) {
+            user.getRoles().add(role);
+        }
+        save(user);
+    }
+
+    public void removeRole(Long userId, Integer roleId) {
+        User user = findById(userId);
+        user.getRoles().remove(roleService.findById(roleId));
+        save(user);
+    }
+
+    public void save(User user) {
+        userRepository.save(user);
+    }
+
+    public User findById(Long userId) {
+        return userRepository.findById(userId).orElseThrow(
+                () -> new IllegalArgumentException(String.format("User id: %s NOT FOUND", userId)));
+    }
 
 
     public Page<User> getUsersPage(int currentPage, int pageSize) {

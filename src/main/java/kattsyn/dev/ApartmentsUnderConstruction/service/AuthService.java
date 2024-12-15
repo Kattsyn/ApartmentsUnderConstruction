@@ -4,7 +4,6 @@ import kattsyn.dev.ApartmentsUnderConstruction.dtos.RegistrationDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 
 @Service
 @AllArgsConstructor
@@ -19,10 +18,7 @@ public class AuthService {
         return "auth/register-page";
     }
 
-    public String register(RegistrationDTO registrationDTO, BindingResult bindingResult) {
-
+    public void register(RegistrationDTO registrationDTO) {
         userService.createUser(registrationDTO);
-
-        return "redirect:/apartments";
     }
 }

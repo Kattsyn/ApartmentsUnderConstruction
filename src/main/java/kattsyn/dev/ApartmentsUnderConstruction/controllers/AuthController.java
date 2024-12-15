@@ -52,12 +52,15 @@ public class AuthController {
 
     @GetMapping("/register")
     public String getRegisterPage(Model model) {
-        return authService.getRegisterPage(model);
+        model.addAttribute("registrationDTO", new RegistrationDTO());
+        return "auth/register-page";
     }
 
     @PostMapping("/register")
-    public String register(@ModelAttribute("registrationDTO")RegistrationDTO registrationDTO, BindingResult bindingResult) {
-        return authService.register(registrationDTO, bindingResult);
+    public String register(@ModelAttribute("registrationDTO") RegistrationDTO registrationDTO, BindingResult bindingResult) {
+        registrationDTO.setStatus(true);
+        authService.register(registrationDTO);
+        return "redirect:/apartments";
     }
 
 }
