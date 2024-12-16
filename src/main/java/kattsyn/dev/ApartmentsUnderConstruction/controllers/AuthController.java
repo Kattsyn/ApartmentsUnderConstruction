@@ -25,8 +25,12 @@ public class AuthController {
     @GetMapping("/login")
     public String login(@RequestParam(value = "error", required = false) String error,
                         @RequestParam(value = "logout", required = false) String logout,
+                        @RequestParam(value = "deactivated", required = false) String deactivated,
                         Model model) {
 
+        if (deactivated != null) {
+            model.addAttribute("errorMessage", "Ваш аккаунт деактивирован администратором");
+        }
         if (error != null) {
             model.addAttribute("errorMessage", "Неправильный логин или пароль");
         }
@@ -52,12 +56,15 @@ public class AuthController {
 
     @GetMapping("/register")
     public String getRegisterPage(Model model) {
-        return authService.getRegisterPage(model);
+        model.addAttribute("registrationDTO", new RegistrationDTO());
+        return "auth/register-page";
     }
 
     @PostMapping("/register")
-    public String register(@ModelAttribute("registrationDTO")RegistrationDTO registrationDTO, BindingResult bindingResult) {
-        return authService.register(registrationDTO, bindingResult);
+    public String register(@ModelAttribute("registrationDTO") RegistrationDTO registrationDTO, BindingResult bindingResult) {
+        registrationDTO.setStatus(true);
+        authService.register(registrationDTO);
+        return "redirect:/apartments";
     }
 
 }

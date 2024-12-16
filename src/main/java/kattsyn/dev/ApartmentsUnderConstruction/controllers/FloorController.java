@@ -5,9 +5,6 @@ import kattsyn.dev.ApartmentsUnderConstruction.entities.Floor;
 import kattsyn.dev.ApartmentsUnderConstruction.mappers.FloorMapper;
 import kattsyn.dev.ApartmentsUnderConstruction.service.FloorService;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +21,7 @@ public class FloorController {
     private final FloorService floorService;
     private final FloorMapper floorMapper;
 
-    @GetMapping({"", "/"})
+    @GetMapping({ "/"})
     public String showFloorsList(
             Model model,
             @RequestParam (defaultValue = "0") int pageNumber,

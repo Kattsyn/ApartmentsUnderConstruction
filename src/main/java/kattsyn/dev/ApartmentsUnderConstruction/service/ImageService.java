@@ -13,10 +13,6 @@ public class ImageService {
 
     private final ImageRepository imageRepository;
 
-    public List<Image> getAllImages() {
-        return imageRepository.findAll();
-    }
-
     public List<Image> fromStringToImageList(List<String> urls) {
         return urls.stream().map(url -> {
                     Image image = new Image();

@@ -30,7 +30,7 @@ public class HouseController {
     private final HouseMapper houseMapper;
 
 
-    @GetMapping({"", "/"})
+    @GetMapping({ "/"})
     public String showHouseList(
             Model model,
             HouseFilter filter,

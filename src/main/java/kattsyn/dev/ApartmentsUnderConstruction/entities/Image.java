@@ -20,4 +20,5 @@ public class Image {
     private Long imageId;
     @Column(name = "url")
     private String url;
+
 }

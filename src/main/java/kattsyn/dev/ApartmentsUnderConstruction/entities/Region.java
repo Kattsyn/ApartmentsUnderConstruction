@@ -20,4 +20,5 @@ public class Region {
     private final Integer regionId;
     @Column(name = "name")
     private final String name;
+
 }

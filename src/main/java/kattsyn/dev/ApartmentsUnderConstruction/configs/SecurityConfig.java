@@ -1,5 +1,6 @@
 package kattsyn.dev.ApartmentsUnderConstruction.configs;
 
+import kattsyn.dev.ApartmentsUnderConstruction.exceptions.AuthFailureHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +16,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
+    private final AuthFailureHandler authenticationFailureHandler;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -26,7 +28,7 @@ public class SecurityConfig {
 
                         .requestMatchers("/manager").hasRole("MANAGER")
 
-                        .requestMatchers("/admin").hasRole("ADMIN")
+                        .requestMatchers("/users/").hasRole("ADMIN")
 
                         .requestMatchers("/secured").authenticated()
 
@@ -35,7 +37,8 @@ public class SecurityConfig {
                         .usernameParameter("username")
                         .passwordParameter("password")
                         .loginPage("/login")
-                        .failureUrl("/login?error")
+                        //.failureUrl("/login?error")
+                        .failureHandler(authenticationFailureHandler)
                         .defaultSuccessUrl("/apartments/", true)
                         .permitAll())
                 .logout(logout -> logout

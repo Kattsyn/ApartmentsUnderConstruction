@@ -20,6 +20,7 @@ public class UserDTO {
     private String surname;
     private String phoneNumber;
     private String email;
+    private Boolean status;
     List<Role> roles;
 
 }

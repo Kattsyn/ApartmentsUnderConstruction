@@ -43,29 +43,44 @@
             <th scope="col">Username</th>
             <th scope="col">Name</th>
             <th scope="col">Surname</th>
-            <th scope="col">phoneNumber</th>
-            <th scope="col">email</th>
-            <th scope="col">roles</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Email</th>
+            <th scope="col">Status</th>
+            <th scope="col">Roles</th>
+            <th scope="col">Actions</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="user : ${users}">
-
             <td th:text="${user.userId}">1</td>
             <td th:text="${user.username}">kat</td>
             <td th:text="${user.name}">Andrew</td>
             <td th:text="${user.surname}">Lincoln</td>
             <td th:text="${user.phoneNumber}">+79201234563</td>
             <td th:text="${user.email}">a.lincoln@gmail.com</td>
+            <td th:text="${user.status}">true</td>
 
             <td>
-                <!-- Добавить роли -->
+                <ul class="list-unstyled">
+                    <li th:each="role : ${user.roles}">
+                        <span th:text="${role.name}"></span>
+                        <a type="button" class="btn btn-sm btn-danger ms-2"
+                           th:if="${role.name != 'ROLE_USER' && user.username != 'admin'}"
+                           th:href="@{/users/removeRole(userId=${user.userId},roleId=${role.roleId})}">
+                            &times;
+                        </a>
+                    </li>
+                </ul>
+                <a class="btn btn-primary" th:href="@{/users/addManagerRole(userId=${user.userId})}">
+                    AddManagerRole
+                </a>
             </td>
+
             <td style="white-space: nowrap">
-                <a class="btn btn-primary btn sm"
-                   th:href="@{/users/edit(id=${user.userId})}">Edit</a>
-                <a class="btn btn-danger btn sm"
-                   th:href="@{/users/delete(id=${user.userId})}">Delete</a>
+                <a class="btn btn-primary btn-sm" th:href="@{/users/edit(userId=${user.userId})}">Edit</a>
+                <a class="btn btn-primary btn-sm" th:if="${user.status == true}" th:href="@{/users/deactivate(userId=${user.userId})}">Deactivate</a>
+                <a class="btn btn-primary btn-sm" th:if="${user.status == false}" th:href="@{/users/activate(userId=${user.userId})}">Activate</a>
+                <a class="btn btn-danger btn-sm" th:href="@{/users/delete(userId=${user.userId})}">Delete</a>
             </td>
         </tr>
         </tbody>
