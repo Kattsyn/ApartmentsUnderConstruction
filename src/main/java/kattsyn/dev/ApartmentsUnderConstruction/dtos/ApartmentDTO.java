@@ -23,7 +23,7 @@ public class ApartmentDTO {
     private String apartmentPlan;
 
     private Long floorId;
-    private Long statusId;
+    private Integer statusId;
     private List<Owner> owners;
 
 }

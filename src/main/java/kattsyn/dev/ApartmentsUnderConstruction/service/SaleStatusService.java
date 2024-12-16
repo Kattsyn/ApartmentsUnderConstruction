@@ -11,10 +11,15 @@ import java.util.List;
 @AllArgsConstructor
 public class SaleStatusService {
 
-    SaleStatusRepository statusRepository;
+    private final SaleStatusRepository statusRepository;
 
     public List<SaleStatus> findAll() {
         return statusRepository.findAll();
+    }
+
+    public SaleStatus findById(Integer id) {
+        return statusRepository.findById(id).orElseThrow(
+                () -> new IllegalArgumentException(String.format("Sale status id: %s NOT FOUND", id)));
     }
 
 }
