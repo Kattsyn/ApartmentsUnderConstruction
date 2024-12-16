@@ -24,11 +24,6 @@ public class Floor {
     @Column(name = "floor_plan")
     private String floorPlan;
 
-    public Floor(Byte floorNumber, String floorPlan) {
-        this.floorNumber = floorNumber;
-        this.floorPlan = floorPlan;
-    }
-
 
     @ManyToOne
     @JoinColumn(name = "house_id")

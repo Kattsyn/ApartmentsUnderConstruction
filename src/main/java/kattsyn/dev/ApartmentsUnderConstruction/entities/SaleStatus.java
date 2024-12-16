@@ -22,4 +22,5 @@ public class SaleStatus {
     private Integer saleStatusId;
     @Column(name = "name")
     private String name;
+
 }
