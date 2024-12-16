@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -24,10 +25,12 @@ public class HouseService {
     private final ImageService imageService;
     private final HouseMapper houseMapper;
 
+    @Transactional
     public Integer getMinApartmentPriceByHouseId(Long id) {
         return houseRepository.getMinApartmentPriceByHouseId(id);
     }
 
+    @Transactional
     public Page<House> getFilteredHousePage(HouseFilter filter, int pageNumber, int pageSize) {
         return houseRepository.findAll(
                 new HouseSpecification(filter),
@@ -35,6 +38,7 @@ public class HouseService {
         );
     }
 
+    @Transactional
     public void saveWithImages(HouseDTO houseDTO, List<String> images) {
         List<Image> savedImages = imageService.saveAllByUrls(images);
 
@@ -43,20 +47,24 @@ public class HouseService {
         save(house);
     }
 
+    @Transactional
     public House findById(Long id) {
         return houseRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException(String.format("House id: %s NOT FOUND", id)));
     }
 
+    @Transactional
     public List<String> getDistinctHousesNames() {
         return houseRepository.getDistinctNames();
     }
 
 
+    @Transactional
     public void deleteHouseById(Long id) {
         houseRepository.delete(findById(id));
     }
 
+    @Transactional
     public void save(House house) {
         houseRepository.save(house);
     }
