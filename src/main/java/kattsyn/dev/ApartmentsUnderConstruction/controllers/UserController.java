@@ -23,7 +23,7 @@ public class UserController {
     private final UserMapper userMapper;
 
     @Secured("ROLE_ADMIN")
-    @GetMapping({"", "/"})
+    @GetMapping({"/"})
     public String showUsersList(
             Model model,
             @RequestParam(defaultValue = "0") int currentPage,

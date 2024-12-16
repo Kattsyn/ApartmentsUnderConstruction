@@ -36,7 +36,7 @@ public class ApartmentController {
     }
 
 
-    @GetMapping({"/", ""})
+    @GetMapping({"/"})
     public String getApartmentsPageWithPaginationAndFiltering(
             Model model,
             ApartmentFilter filter,
