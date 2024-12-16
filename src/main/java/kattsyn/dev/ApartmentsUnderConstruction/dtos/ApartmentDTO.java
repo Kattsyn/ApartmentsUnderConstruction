@@ -26,13 +26,4 @@ public class ApartmentDTO {
     private Long statusId;
     private List<Owner> owners;
 
-    public ApartmentDTO(Integer apartmentNumber, Float totalArea, Float livingArea, Byte amountOfRooms, Byte entranceNumber, Integer apartmentCost, String apartmentPlan) {
-        this.apartmentNumber = apartmentNumber;
-        this.totalArea = totalArea;
-        this.livingArea = livingArea;
-        this.amountOfRooms = amountOfRooms;
-        this.entranceNumber = entranceNumber;
-        this.apartmentCost = apartmentCost;
-        this.apartmentPlan = apartmentPlan;
-    }
 }

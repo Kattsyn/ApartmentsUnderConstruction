@@ -3,10 +3,8 @@ package kattsyn.dev.ApartmentsUnderConstruction.controllers;
 import kattsyn.dev.ApartmentsUnderConstruction.dtos.ApartmentDTO;
 import kattsyn.dev.ApartmentsUnderConstruction.dtos.filters.ApartmentFilter;
 import kattsyn.dev.ApartmentsUnderConstruction.entities.Apartment;
-import kattsyn.dev.ApartmentsUnderConstruction.service.ApartmentService;
-import kattsyn.dev.ApartmentsUnderConstruction.service.FloorService;
-import kattsyn.dev.ApartmentsUnderConstruction.service.HouseService;
-import kattsyn.dev.ApartmentsUnderConstruction.service.RegionService;
+import kattsyn.dev.ApartmentsUnderConstruction.mappers.ApartmentMapper;
+import kattsyn.dev.ApartmentsUnderConstruction.service.*;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.annotation.Secured;
@@ -29,6 +27,8 @@ public class ApartmentController {
     private final HouseService houseService;
     private final FloorService floorService;
     private final RegionService regionService;
+    private final SaleStatusService statusService;
+    private final ApartmentMapper apartmentMapper;
 
     @GetMapping("/info")
     public String showInfoPage(Model model, @RequestParam Long id) {
@@ -68,19 +68,32 @@ public class ApartmentController {
     @Secured("ROLE_MANAGER")
     @GetMapping("/create")
     public String showCreatePage(Model model) {
-        return apartmentService.showCreatePage(model);
+        model.addAttribute("apartmentDTO", new ApartmentDTO());
+        model.addAttribute("saleStatuses", statusService.findAll());
+        return "apartments/create-apartment";
     }
 
     @Secured("ROLE_MANAGER")
     @PostMapping("/create")
     public String createApartment(@Valid @ModelAttribute("apartmentDTO") ApartmentDTO apartmentDTO, BindingResult bindingResult) {
-        return apartmentService.createApartment(apartmentDTO, bindingResult);
+        if (bindingResult.hasErrors()) {
+            return "apartments/create-apartment";
+        }
+        apartmentService.save(apartmentDTO);
+        return "redirect:/apartments";
     }
 
     @Secured("ROLE_MANAGER")
     @GetMapping("/edit")
     public String showEditPage(Model model, @RequestParam Long id) {
-        return apartmentService.showEditPage(model, id);
+        Apartment apartment = apartmentService.findById(id);
+        ApartmentDTO apartmentDTO = apartmentMapper.toApartmentDTO(apartment);
+
+        model.addAttribute("apartment", apartment);
+        model.addAttribute("apartmentDTO", apartmentDTO);
+        model.addAttribute("saleStatuses", statusService.findAll());
+
+        return "apartments/edit-apartment";
     }
 
     @Secured("ROLE_MANAGER")
@@ -89,13 +102,22 @@ public class ApartmentController {
                                 @RequestParam Long id,
                                 ApartmentDTO apartmentDTO,
                                 BindingResult bindingResult) {
-        return apartmentService.editApartment(model, id, apartmentDTO, bindingResult);
+        Apartment apartment = apartmentService.findById(id);
+        model.addAttribute("apartment", apartment);
+
+        if (bindingResult.hasErrors()) {
+            return "apartments/edit-apartment";
+        }
+
+        apartmentService.save(apartmentDTO);
+        return "redirect:/apartments";
     }
 
     @Secured("ROLE_MANAGER")
     @GetMapping("/delete")
     public String deleteApartmentById(@RequestParam Long id) {
-        return apartmentService.deleteApartmentById(id);
+        apartmentService.deleteApartmentById(id);
+        return "redirect:/apartments";
     }
 
 
