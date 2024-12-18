@@ -12,10 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -42,17 +40,6 @@ public class ApartmentService {
         return apartmentRepository.findAll(
                 new ApartmentSpecification(filter),
                 PageRequest.of(pageNumber, pageSize));
-    }
-
-    @Transactional
-    public String showInfoPage(Model model, Long id) {
-        Optional<Apartment> apartment = apartmentRepository.findById(id);
-        if (apartment.isEmpty()) {
-            log.error("Apartment with id {} not found", id);
-            return "redirect:/apartments";
-        }
-        model.addAttribute("apartment", apartment.get());
-        return "apartments/info-apartment";
     }
 
 
