@@ -1,0 +1,30 @@
+<div class="d-flex justify-content-center">
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <li class="page-item" th:classappend="${currentPage == 0 ? 'disabled' : ''}">
+                <a class="page-link" th:href="@{${baseUrl}?currentPage=0}" aria-label="First">
+                    <span aria-hidden="true">&laquo;&laquo;</span>
+                </a>
+            </li>
+            <li class="page-item" th:classappend="${currentPage == 0 ? 'disabled' : ''}">
+                <a class="page-link" th:href="@{${baseUrl}(currentPage=${currentPage - 1})}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li class="page-item" th:each="pageNum : ${pageNumbers}">
+                <a class="page-link" th:href="@{${baseUrl}(currentPage=${pageNum})}"
+                   th:text="${pageNum + 1}" aria-label="Page ${pageNum + 1}"></a>
+            </li>
+            <li class="page-item" th:classappend="${currentPage == totalPages - 1 ? 'disabled' : ''}">
+                <a class="page-link" th:href="@{${baseUrl}(currentPage=${currentPage + 1})}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+            <li class="page-item" th:classappend="${currentPage == totalPages - 1 ? 'disabled' : ''}">
+                <a class="page-link" th:href="@{/{baseUrl}/(currentPage=${totalPages - 1})}" aria-label="Last">
+                    <span aria-hidden="true">&raquo;&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>

@@ -35,3 +35,12 @@ body {
 .hover-area:hover ~ .carousel-images {
     transform: translateX(-100%);
 }
+#getHousesButton {
+    padding: 10px;
+    background-color: #007bff;
+    color: #f5f6fa;
+    width: 200px;
+}
+#clearFilters {
+    padding: 10px;
+}
