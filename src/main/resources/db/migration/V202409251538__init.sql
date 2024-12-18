@@ -107,5 +107,16 @@ CREATE TABLE users_roles
     foreign key (role_id) references roles (role_id)
 );
 
+CREATE TABLE apartments_reservations
+(
+    apartments_reservations_id BIGSERIAL PRIMARY KEY NOT NULL,
+    apartment_id BIGINT NOT NULL,
+    client_name VARCHAR(255) NOT NULL,
+    phone_number VARCHAR(20) NOT NULL,
+    call_request_date DATE NOT NULL,
+    is_confirmed BOOLEAN NOT NULL,
+    foreign key (apartment_id) references apartments (apartment_id)
+);
+
 
 

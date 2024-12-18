@@ -1,6 +1,7 @@
 package kattsyn.dev.ApartmentsUnderConstruction.controllers;
 
 import kattsyn.dev.ApartmentsUnderConstruction.dtos.ApartmentDTO;
+import kattsyn.dev.ApartmentsUnderConstruction.dtos.ApartmentReservationRequestDTO;
 import kattsyn.dev.ApartmentsUnderConstruction.dtos.filters.ApartmentFilter;
 import kattsyn.dev.ApartmentsUnderConstruction.entities.Apartment;
 import kattsyn.dev.ApartmentsUnderConstruction.mappers.ApartmentMapper;
@@ -28,11 +29,21 @@ public class ApartmentController {
     private final FloorService floorService;
     private final RegionService regionService;
     private final SaleStatusService statusService;
+    private final ApartmentReservationService reservationService;
     private final ApartmentMapper apartmentMapper;
 
     @GetMapping("/info")
     public String showInfoPage(Model model, @RequestParam Long id) {
-        return apartmentService.showInfoPage(model, id);
+        model.addAttribute("apartment", apartmentService.findById(id));
+        model.addAttribute("reservationRequest", new ApartmentReservationRequestDTO());
+        return "apartments/info-apartment";
+    }
+
+    @PostMapping("/reserveApartment")
+    public String reserveApartment(@ModelAttribute("reservationRequest") ApartmentReservationRequestDTO reservationRequestDTO) {
+        System.out.println(reservationRequestDTO);
+        reservationService.save(reservationRequestDTO);
+        return "redirect:/apartments/";
     }
 
 
