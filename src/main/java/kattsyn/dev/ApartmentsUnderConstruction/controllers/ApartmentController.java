@@ -91,7 +91,7 @@ public class ApartmentController {
             return "apartments/create-apartment";
         }
         apartmentService.save(apartmentDTO);
-        return "redirect:/apartments";
+        return "redirect:/apartments/";
     }
 
     @Secured("ROLE_MANAGER")
@@ -121,14 +121,14 @@ public class ApartmentController {
         }
 
         apartmentService.save(apartmentDTO);
-        return "redirect:/apartments";
+        return "redirect:/apartments/";
     }
 
     @Secured("ROLE_MANAGER")
     @GetMapping("/delete")
     public String deleteApartmentById(@RequestParam Long id) {
         apartmentService.deleteApartmentById(id);
-        return "redirect:/apartments";
+        return "redirect:/apartments/";
     }
 
 

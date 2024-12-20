@@ -20,7 +20,7 @@ public class Floor {
     @Column(name = "floor_id")
     private Long floorId;
     @Column(name = "floor_number")
-    private Byte floorNumber;
+    private Integer floorNumber;
     @Column(name = "floor_plan")
     private String floorPlan;
 

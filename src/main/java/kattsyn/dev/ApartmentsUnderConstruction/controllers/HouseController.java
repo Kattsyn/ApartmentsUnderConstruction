@@ -67,7 +67,7 @@ public class HouseController {
         }
         houseService.saveWithImages(houseDTO, images);
         houseService.save(houseMapper.fromHouseDTO(houseDTO));
-        return "redirect:/houses";
+        return "redirect:/houses/";
     }
 
     @GetMapping("/edit")
@@ -94,13 +94,13 @@ public class HouseController {
 
         houseService.save(houseMapper.fromHouseDTO(houseDTO));
 
-        return "redirect:/houses";
+        return "redirect:/houses/";
     }
 
 
     @GetMapping("/delete")
     public String deleteHouseById(@RequestParam Long id) {
         houseService.deleteHouseById(id);
-        return "redirect:/houses";
+        return "redirect:/houses/";
     }
 }
