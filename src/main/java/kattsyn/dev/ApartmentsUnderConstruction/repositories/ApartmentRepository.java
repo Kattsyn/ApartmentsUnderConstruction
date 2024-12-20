@@ -17,6 +17,13 @@ public interface ApartmentRepository extends JpaRepository<Apartment, Long>, Jpa
     @Query("SELECT DISTINCT a.amountOfRooms FROM Apartment a")
     List<Byte> findDistinctRooms();
 
+    @Query("SELECT status.name, COUNT(*) FROM Apartment GROUP BY status")
+    List<Object[]> findApartmentCountByStatus();
 
+    @Query("SELECT h.name, f.floorNumber, COUNT(a) FROM Apartment a " +
+            "JOIN a.floor f " +
+            "JOIN f.house h " +
+            "GROUP BY h.name, f.floorNumber")
+    List<Object[]> countApartmentsByFloorAndBuilding();
 
 }

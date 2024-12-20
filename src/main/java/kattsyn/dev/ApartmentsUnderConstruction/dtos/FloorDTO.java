@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 public class FloorDTO {
 
-    private Byte floorNumber;
+    private Integer floorNumber;
     private String floorPlan;
     private Long houseId;
 

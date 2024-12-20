@@ -58,6 +58,10 @@ public class HouseService {
         return houseRepository.getDistinctNames();
     }
 
+    @Transactional
+    public List<House> findAll() {
+        return houseRepository.findAll();
+    }
 
     @Transactional
     public void deleteHouseById(Long id) {

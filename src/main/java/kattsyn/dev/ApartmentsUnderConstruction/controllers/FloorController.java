@@ -4,6 +4,7 @@ import kattsyn.dev.ApartmentsUnderConstruction.dtos.FloorDTO;
 import kattsyn.dev.ApartmentsUnderConstruction.entities.Floor;
 import kattsyn.dev.ApartmentsUnderConstruction.mappers.FloorMapper;
 import kattsyn.dev.ApartmentsUnderConstruction.service.FloorService;
+import kattsyn.dev.ApartmentsUnderConstruction.service.HouseService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ import javax.validation.Valid;
 public class FloorController {
 
     private final FloorService floorService;
+    private final HouseService houseService;
     private final FloorMapper floorMapper;
 
     @GetMapping({ "/"})
@@ -40,10 +42,11 @@ public class FloorController {
     @GetMapping("/create")
     public String showCreatePage(Model model) {
         model.addAttribute("floorDTO", new FloorDTO());
+        model.addAttribute("houses", houseService.findAll());
         return "floors/create-floor";
     }
 
-    @Secured("ROLE_MANAGER")
+    //@Secured("ROLE_MANAGER")
     @PostMapping("/create")
     public String createHouse(@Valid @ModelAttribute("floorDTO") FloorDTO floorDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -54,7 +57,7 @@ public class FloorController {
         } catch (IllegalArgumentException exception) {
             return "floors/create-floor";
         }
-        return "redirect:/floors";
+        return "redirect:/floors/";
     }
 
     @Secured("ROLE_MANAGER")
@@ -83,13 +86,13 @@ public class FloorController {
 
         floorService.editFloor(id, floorDTO);
 
-        return "redirect:/floors";
+        return "redirect:/floors/";
     }
 
     @Secured("ROLE_MANAGER")
     @GetMapping("/delete")
     public String deleteFloorById(@RequestParam Long id) {
         floorService.deleteFloorById(id);
-        return "redirect:/floors";
+        return "redirect:/floors/";
     }
 }

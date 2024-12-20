@@ -36,7 +36,7 @@ CREATE TABLE floors
 (
     floor_id     BIGSERIAL PRIMARY KEY,
     house_id     BIGINT   NOT NULL,
-    floor_number SMALLINT NOT NULL,
+    floor_number INT NOT NULL,
     floor_plan   VARCHAR(1000),
     foreign key (house_id) references houses (house_id)
 );

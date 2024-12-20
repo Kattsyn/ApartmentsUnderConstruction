@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Статистика по количеству квартир на этажах</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+</head>
+<body>
+<!-- Контейнер для страницы -->
+<div class="container">
+    <!-- Добавим место для Navbar -->
+    <div th:replace="~{fragments/navbar}"></div>
+
+    <h2 class="mb-4 text-center">Статистика по количеству квартир на этажах</h2>
+
+    <!-- Блок для каждого дома -->
+    <div th:each="house, houseStat : ${housesStatistics.entrySet()}">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3 th:text="${houseStat.current.getKey()}">Building A</h3>  <!-- Название здания -->
+            </div>
+            <div class="card-body">
+                <!-- Таблица с этажами -->
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Этаж</th>
+                        <th scope="col">Количество квартир</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="entry : ${house.getValue().entrySet()}">
+                        <td th:text="${entry.key}">Этаж 1</td>  <!-- Этаж -->
+                        <td th:text="${entry.value}">10</td>  <!-- Количество квартир -->
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Подключаем Bootstrap JS (если нужны компоненты, например, всплывающие окна или модальные окна) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
