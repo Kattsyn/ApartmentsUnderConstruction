@@ -9,11 +9,13 @@
     </div>
 
     <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
-        <li><a href="#" class="nav-link px-2">Features</a></li>
-        <li><a href="#" class="nav-link px-2">Pricing</a></li>
-        <li><a href="#" class="nav-link px-2">FAQs</a></li>
-        <li><a href="#" class="nav-link px-2">About</a></li>
+        <li><a href="/" class="nav-link px-2 link-secondary">Home</a></li>
+        <li><a href="/houses/" class="nav-link px-2">Houses</a></li>
+        <li><a href="/floors/" class="nav-link px-2">Floors</a></li>
+        <li><a href="/apartments/" class="nav-link px-2">Apartments</a></li>
+        <li><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/users/}" class="nav-link px-2">Users</a></li>
+        <li><a sec:authorize="hasRole('ROLE_MANAGER')" th:href="@{/stats/houses}" class="nav-link px-2">HouseStat</a></li>
+        <li><a sec:authorize="hasRole('ROLE_MANAGER')" th:href="@{/stats/apartments}" class="nav-link px-2">ApsStat</a></li>
     </ul>
 
     <div class="col-md-3 text-end">

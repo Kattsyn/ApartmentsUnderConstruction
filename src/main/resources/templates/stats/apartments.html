@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" th:href="@{/css/base.css}">
+</head>
+<body>
+
+<div class="container justify-content-center">
+
+    <div th:insert="~{fragments/navbar.html}"></div>
+
+    <h2 class="mb-4 text-center">Статистика по статусам квартир</h2>
+
+    <!-- Место для визуализации диаграммы -->
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <canvas id="statusPieChart" class="shadow-sm" width="400" height="400"></canvas>
+        </div>
+    </div>
+
+</div>
+
+<script th:inline="javascript">
+    // Получаем статистику как строку JSON из модели Thymeleaf
+    const statisticsJson = /*[[${statistics}]]*/ '{}';  // Вставляем строку JSON
+
+    // Преобразуем строку JSON в объект JavaScript
+    const statistics = JSON.parse(statisticsJson);  // Преобразуем строку в объект
+
+    // Извлекаем данные для диаграммы
+    const labels = Object.keys(statistics);  // Статусы квартир
+    const data = Object.values(statistics);  // Количество квартир по статусам
+
+    // Настройка диаграммы
+    const ctx = document.getElementById('statusPieChart').getContext('2d');
+    const statusPieChart = new Chart(ctx, {
+        type: 'pie',  // Тип диаграммы: круговая
+        data: {
+            labels: labels,  // Названия статусов квартир
+            datasets: [{
+                data: data,  // Количество квартир
+                backgroundColor: ['#FF5733', '#33FF57', '#3357FF'],  // Цвета секторов
+                hoverBackgroundColor: ['#FF5733', '#33FF57', '#3357FF']  // Цвета при наведении
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function (context) {
+                            const label = context.label || '';
+                            const value = context.raw || 0;
+                            return label + ': ' + value + ' квартир';
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
