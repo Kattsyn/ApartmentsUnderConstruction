@@ -40,10 +40,10 @@
             </td>
             <td style="white-space: nowrap">
                 <!-- Кнопка подтверждения заявки -->
-                <a th:href="@{/reservations/confirm(id=${reservation.apartmentReservationId})}" class="btn btn-success btn-sm"
+                <a th:href="@{/reservations/confirm(reservationId=${reservation.apartmentReservationId})}" class="btn btn-success btn-sm"
                    th:if="${!reservation.isConfirmed}">Подтвердить</a>
                 <!-- Кнопка удаления заявки -->
-                <a th:href="@{/reservations/delete(id=${reservation.apartmentReservationId})}" class="btn btn-danger btn-sm"
+                <a th:href="@{/reservations/delete(reservationId=${reservation.apartmentReservationId})}" class="btn btn-danger btn-sm"
                    onclick="return confirm('Вы уверены, что хотите удалить эту заявку?');">Удалить</a>
             </td>
         </tr>

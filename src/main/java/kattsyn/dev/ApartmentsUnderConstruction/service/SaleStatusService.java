@@ -25,4 +25,8 @@ public class SaleStatusService {
                 () -> new IllegalArgumentException(String.format("Sale status id: %s NOT FOUND", id)));
     }
 
+    public SaleStatus getReservedStatus() {
+        return statusRepository.findByName("RESERVED");
+    }
+
 }

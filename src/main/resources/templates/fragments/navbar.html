@@ -16,6 +16,7 @@
         <li><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/users/}" class="nav-link px-2">Users</a></li>
         <li><a sec:authorize="hasRole('ROLE_MANAGER')" th:href="@{/stats/houses}" class="nav-link px-2">HouseStat</a></li>
         <li><a sec:authorize="hasRole('ROLE_MANAGER')" th:href="@{/stats/apartments}" class="nav-link px-2">ApsStat</a></li>
+        <li><a sec:authorize="hasRole('ROLE_MANAGER')" th:href="@{/reservations/}" class="nav-link px-2">CallRequests</a></li>
     </ul>
 
     <div class="col-md-3 text-end">

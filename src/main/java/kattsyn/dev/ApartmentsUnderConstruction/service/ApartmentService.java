@@ -49,6 +49,10 @@ public class ApartmentService {
         apartmentRepository.save(apartment);
     }
 
+    public void save(Apartment apartment) {
+        apartmentRepository.save(apartment);
+    }
+
     @Transactional
     public void deleteApartmentById(Long id) {
         apartmentRepository.delete(findById(id));
